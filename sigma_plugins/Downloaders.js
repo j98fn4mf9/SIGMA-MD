@@ -197,7 +197,7 @@ async(sigma, person, memo) => {
             let fileSizeInMegabytes = fileSizeInBytes / (1024 * 1024);
             if (fileSizeInMegabytes <= dlsize) {
                 let Maher = {
-                    video: fs.readFileSync(`./${randomName}`),
+                    document: fs.readFileSync(`./${randomName}`),
                     jpegThumbnail: log0,
         
                     mimetype: 'video/mp4',
