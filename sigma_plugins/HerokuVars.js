@@ -28,6 +28,43 @@ const fetch = require('node-fetch');
 
 if(Config.HEROKU_APP_NAME && Config.HEROKU_API_KEY ){
         
+  Module_Exports({
+    kingcmd: "read",
+    //shortcut:["ssudo"],
+    infocmd: "provide owner rule to someone so he can use your bot",
+    kingclass: "tools",
+    kingpath: __filename
+},
+async(Void, citel, text) => {
+//if(!citel.quoted) return await citel.reply(`*_Please Reply A User_*`);
+let user = text
+if (Config.readmessage.includes(user)) return citel.reply("*_That Var Already Exist_*");
+Config.readmessage +=  user ;
+const headers = 
+{
+       'Accept': 'application/vnd.heroku+json; version=3',
+        'Authorization': `Bearer ${authToken}`,
+        'Content-Type': 'application/json'
+};
+const varName = 'READ_MESSAGE'
+const newVarValue = Config.readmessage        
+fetch(`https://api.heroku.com/apps/${appName}/config-vars`,
+{
+         method: 'PATCH',
+         headers,
+         body: JSON.stringify({ [varName]: newVarValue })
+})
+.then(response => response.json())
+.then(data => { return citel.reply(`*_${user} Added Succesfully._*\n*_New Var Numbers:_* ${newVarValue}`); })
+.catch(error => citel.reply('*_Error While Adding new Sudo:_* '+ error));
+
+})
+
+
+
+
+
+
          Module_Exports({
              kingcmd: "setsudo",
              shortcut:["ssudo"],
