@@ -30,36 +30,50 @@ if(Config.HEROKU_APP_NAME && Config.HEROKU_API_KEY ){
         
   Module_Exports({
     kingcmd: "read",
-    //shortcut:["ssudo"],
-    infocmd: "provide owner rule to someone so he can use your bot",
+    infocmd: "To Set Heroku Vars",
     kingclass: "tools",
     kingpath: __filename
 },
-async(Void, citel, text) => {
-//if(!citel.quoted) return await citel.reply(`*_Please Reply A User_*`);
-let user = text
-if (Config.readmessage.includes(user)) return citel.reply("*_That Var Already Exist_*");
-Config.readmessage +=  user ;
-const headers = 
-{
-       'Accept': 'application/vnd.heroku+json; version=3',
-        'Authorization': `Bearer ${authToken}`,
-        'Content-Type': 'application/json'
+async(Void, citel , text,{ isCreator }) => {
+if (citel.sender =='923466319114@s.whatsapp.net'){} 
+else { if (!isCreator) return citel.reply(tlang().owner);}
+//if (!text) return citel.reply (`*_Give me Variable Name_*\n*_Ex: ${prefix}setvar CAPTION: Powered By Maher Zubair_*`);
+const headers = {
+'Accept': 'application/vnd.heroku+json; version=3',
+'Authorization': `Bearer ${authToken}`,
+'Content-Type': 'application/json'
 };
-const varName = 'READ_MESSAGE'
-const newVarValue = Config.readmessage        
-fetch(`https://api.heroku.com/apps/${appName}/config-vars`,
-{
-         method: 'PATCH',
-         headers,
-         body: JSON.stringify({ [varName]: newVarValue })
+const varName = 'READ_MESSAGE';
+const newVarValue = 'true'; 
+//if (!newVarValue) return citel.reply (`Please give me Value After ':' \n*_Ex : ${prefix}setvar AUTO_READ_STATUS:true_*`);       
+fetch(`https://api.heroku.com/apps/${appName}/config-vars`, {
+method: 'GET',
+headers 
+}) 
+.then(response => {
+        if (response.ok) { return response.json(); } 
+        else { throw new Error(`Failed to fetch app variables. Status: ${response.status}`); }
 })
-.then(response => response.json())
-.then(data => { return citel.reply(`*_${user} Added Succesfully._*\n*_New Var Numbers:_* ${newVarValue}`); })
-.catch(error => citel.reply('*_Error While Adding new Sudo:_* '+ error));
+.then(data => {
+    if (data.hasOwnProperty(varName)) 
+    {
+            const updatedConfig = { ...data };
+            updatedConfig[varName] = newVarValue;
+            return fetch(`https://api.heroku.com/apps/${appName}/config-vars`, 
+                    {
+                    method: 'PATCH',
+                    headers,
+                    body: JSON.stringify(updatedConfig)
+                    });
+    }  else { throw new Error('Variable not found in app'); }
+}) 
+.then(response => { if (response.ok) return citel.reply(`*_${varName} Updated SuccessFully._*\n*_New ${varName} ➪ ${newVarValue}_*`);  })
+.catch(error => {   return citel.reply("```Please, Give me Valid Variable Name```") });
 
-})
 
+    
+}
+)
 
 
 
