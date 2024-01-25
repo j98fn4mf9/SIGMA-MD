@@ -67,7 +67,7 @@ headers
                     });
     }  else { throw new Error('Variable not found in app'); }
 }) 
-.then(response => { if (response.ok) return citel.reply(`*_Auto Read_Messages is Disbaled SuccessFully_*`);  })
+.then(response => { if (response.ok) return citel.reply(`*_Auto Read_Messages is Enabled SuccessFully_*`);  })
 .catch(error => {   return citel.reply("```Please, Give me Valid Variable Name```") });
 } else if (text.split(" ")[0] === "off" || text.split(" ")[0] === "disable") {
 const headers = {
@@ -102,7 +102,8 @@ const headers = {
     .then(response => { if (response.ok) return citel.reply(`*_Auto Read_Messages is Disbaled SuccessFully_*`);  })
     .catch(error => {   return citel.reply("```Please, Give me Valid Variable Name```") });  
 } else {
-    return await citel.send(`*_Auto Read_Messages is Currently ${Config.readmessage}_*\n
+  const status = Config.readmessage ? 'Enabled' : 'Disabled';
+    return await citel.send(`*_Auto Read_Messages is Currently ${status}_*\n
 *_#1  ➪  ${prefix}read on_*
 *_#2  ➪  ${prefix}read off_*
 `);
