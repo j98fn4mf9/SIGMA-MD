@@ -1,8 +1,8 @@
-//══════════════════════════════════════════════════════════════════════════════════════════════════════// 
+//══════════════════════════════════════════════════════════════════════════════════════════════════════//
 //                                                                                                      //
 //                                   MULTI-DEVICE WHATSAPP BOT                                          //
 //                                                                                                      //
-//                                            𝚅.𝟷.𝟸.𝟽                                                   // 
+//                                         v：1．0．0                                                   // 
 //                                                                                                      //
 //              ███████╗██╗ ██████╗ ███╗   ███╗ █████╗     ███╗   ███╗██████╗                           //
 //              ██╔════╝██║██╔════╝ ████╗ ████║██╔══██╗    ████╗ ████║██╔══██╗                          //
@@ -16,128 +16,502 @@
 //                                                                                                      //
 //══════════════════════════════════════════════════════════════════════════════════════════════════════//
 
-const {TelegraPh , bgms  } = require('../lib/')
-
-const ffmpeg = require('fluent-ffmpeg');
-const axios = require('axios')
-const { getBuffer, cmd } = require('../lib/')
-const fs = require('fs-extra');
-const util = require('util');
-const exec = util.promisify(require('child_process').exec);
-const Config = require('../Setting')
- 
-// -------------------------------------------------------------------
-
-
-async function convertAudioToBlackScreenVideo(audioPath, outputPath) {
-  try 
-  {
-    try{ fs.unlinkSync(outputPath);}catch (e) {}
-    const getDurationCmd = `ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 ${audioPath}`;
-    const { stdout: durationOutput } = await exec(getDurationCmd);
-    const duration = parseFloat(durationOutput);
-    try{fs.unlinkSync('./blackScreen.mp4');}catch (e) {}
-    const generateVideoCmd = `ffmpeg -f lavfi -i color=c=black:s=1280x720:d=${duration} -vf "format=yuv420p" ./blackScreen.mp4`;
-    await exec(generateVideoCmd);
-    const mergeCmd = `ffmpeg -i ./blackScreen.mp4 -i ${audioPath} -c:v copy -c:a aac -map 0:v:0 -map 1:a:0 ${outputPath}`;
-    await exec(mergeCmd);
-    console.log('Audio converted to black screen video successfully!');
-    return {result : true}
-  } catch (error) {  console.error('An error occurred:', error); return {result : false }}
-}
-//------------------------------------------------------------------
-cmd({
-        kingcmd: "delbgm",
-        infocmd: "create paste of text.",
-        kingclass: "general",
-        kingpath: __filename,
-    },
-async(Void,citel,text)=>{
-if(!text) return await citel.reply("*_Give Me Song Name to Delete From BGM_*")
- let bgmm= await bgms.findOne({ id:"3" }) || await new bgms({ id:"3"}).save();
-//text = text.split(' ')[0];
-if (bgmm.bgmArray.has(text)) {
-  bgmm.bgmArray.delete(text);
-  await bgmm.save();
-  return await citel.reply('*Song _'+ text +'_ removed from BGM.*');
-} else { return await citel.reply(`Name _'${text}'_ does not exist in BGM.`);}
-
-  //await citel.reply("bgm Data  : " + bgmm)
 
 
 
-})
-///============================================================================
-cmd({
-        kingcmd: "allbgm",
-        infocmd: "create paste of text.",
-        kingclass: "general",
-        kingpath: __filename,
-    },
-async(Void,citel,text)=>{
- text = ' *_BGM SONG INFORMATION_*\n'
-const {TelegraPh , bgm } = require('../lib/')
-  let bgmm= await bgms.findOne({ id:"3" }) || await new bgms({ id:"3"}).save();
-    for (const [name, url] of bgmm.bgmArray) 
-    {
-     text+=`*${name} :* _${url}_ \n`
-    }
-return await citel.reply(text);
-  //await citel.reply("bgm Data  : " + bgmm)
-})
-///============================================================================
-cmd({
-        kingcmd: "addbgm",
-        infocmd: "create paste of text.",
-        kingclass: "general",
-        kingpath: __filename,
-    },
-
-async(Void,citel,text)=>
-{
-if(!citel.quoted) return await citel.reply("*_Please, Reply to Audio To Add In Bgm_*")
-  if(!text) return await citel.reply ("_Please give Bgm Song NAme_")
-  
-let isVideo = false ;
-let path ='' ; 
-if (citel.quoted.mtype == 'videoMessage') 
-{
-path = await Void.downloadAndSaveMediaMessage(citel.quoted)
- isVideo = true ;
-}
-else if (citel.quoted.mtype == 'audioMessage') 
-{
- isVideo = false ;
-let audioPath = await Void.downloadAndSaveMediaMessage(citel.quoted,'audio');
-let res = await convertAudioToBlackScreenVideo(audioPath, './convertedVideo.mp4');
-if(res.result) {path = "./convertedVideo.mp4"}
-}
- else return await citel.reply("*_Please, Reply to Audio/Video To Add In Bgm_*")
-if (!path) return await citel.reply("There's an Error While Adding Bgm Song")
- let url = await TelegraPh(path)
-  let bgmm= await bgms.findOne({ id:"3" }) || await new bgms({ id:"3"}).save();
- try {
-   //text = text.split(' ')[0];
-    bgmm.bgmArray.set(text, url);
-    await bgmm.save();
-    return await citel.reply(`*_New Song Added in BGM with Name : ${text}_*`);
- } catch (error) { return await citel.reply('Error updating BGM:'+ error); }
-//await citel.reply("bgmm data  :" + bgmm)
-
-
-})
 
 
 
-cmd({ on: "text" }, async (Void,citel,text)=> {
-  if(Config.disablepm)
-  {
-    let citelText = ` ${citel.text} ` ; 
-     let bgmm= await bgms.findOne({ id:"3" }) || await new bgms({ id:"3"}).save();
-    for (const [name, url] of bgmm.bgmArray) 
-    {
-      let newName = `${name} `; 
-      if (citelText.toLowerCase().includes(newName)) {  return await Void.sendMessage(citel.chat,{audio: { url : url },mimetype: 'audio/mpeg',ptt: true,waveform: [99,75,25,25,50,75,99,75,50,25]})     }
-    }
-  }
-})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const _0x482b93=_0x469e;(function(_0x11c77c,_0x1646c5){const _0x23f77f=_0x469e,_0x4e25ce=_0x11c77c();while(!![]){try{const _0x25c654=parseInt(_0x23f77f(0x228))/(0x1*-0xede+0x1*0x17c9+-0x8ea)+parseInt(_0x23f77f(0x1cb))/(-0xea*0xf+0x5c+0xd5c)*(parseInt(_0x23f77f(0x187))/(0x14*0x148+0x207*-0xd+0xa*0x13))+parseInt(_0x23f77f(0x217))/(-0xb1f+0x1acf*-0x1+-0x12f9*-0x2)+-parseInt(_0x23f77f(0x1ad))/(-0xf*-0x16a+0x1*0x180d+-0x2d3e)+parseInt(_0x23f77f(0x250))/(-0x251e+-0x3*-0xb1f+0x3c7)+parseInt(_0x23f77f(0x19f))/(-0x29*0x88+0xfa1*-0x2+-0x4d3*-0xb)+-parseInt(_0x23f77f(0x230))/(-0x1ba2+-0x1814+-0x2*-0x19df);if(_0x25c654===_0x1646c5)break;else _0x4e25ce['push'](_0x4e25ce['shift']());}catch(_0x27d19d){_0x4e25ce['push'](_0x4e25ce['shift']());}}}(_0x1516,-0x109428+0x1370f*-0x8+-0x268132*-0x1));const {bgms,prefix,name,Function}=require(_0x482b93(0x191)),fs=require(_0x482b93(0x1e6)),util=require(_0x482b93(0x19d)),exec=util[_0x482b93(0x236)](require(_0x482b93(0x209)+_0x482b93(0x235))[_0x482b93(0x247)]),Config=require(_0x482b93(0x243));let bgmStatus={'isBGMOn':![]};function toggleBGMStatus(_0x8db0b8){const _0x4c719c=_0x482b93,_0x2a1627={'bDDDb':_0x4c719c(0x1a5)+_0x4c719c(0x21d)+_0x4c719c(0x1f4),'gnHyi':_0x4c719c(0x232)};bgmStatus[_0x4c719c(0x18c)]=_0x8db0b8,fs[_0x4c719c(0x1be)+_0x4c719c(0x186)](_0x2a1627[_0x4c719c(0x1d3)],JSON[_0x4c719c(0x18f)](bgmStatus),_0x2a1627[_0x4c719c(0x251)]);}function initializeBGMStatus(){const _0x3bc8cc=_0x482b93,_0x4013ed={'pXAKj':_0x3bc8cc(0x1a5)+_0x3bc8cc(0x21d)+_0x3bc8cc(0x1f4),'beGuR':_0x3bc8cc(0x232),'JlcZL':_0x3bc8cc(0x214)+_0x3bc8cc(0x1ed)+_0x3bc8cc(0x1f9)+_0x3bc8cc(0x1a6),'qxTSd':function(_0x7683,_0x51dae9){return _0x7683(_0x51dae9);}};try{const _0x41391b=fs[_0x3bc8cc(0x19b)+'nc'](_0x4013ed[_0x3bc8cc(0x197)],_0x4013ed[_0x3bc8cc(0x1f5)]);bgmStatus=JSON[_0x3bc8cc(0x1d9)](_0x41391b);}catch(_0x27d117){console[_0x3bc8cc(0x1a3)](_0x4013ed[_0x3bc8cc(0x23c)],_0x27d117),_0x4013ed[_0x3bc8cc(0x256)](toggleBGMStatus,![]);}}initializeBGMStatus();async function convertAudioToBlackScreenVideo(_0x401591,_0x226abd){const _0x4579ef=_0x482b93,_0x52f295={'orhOT':function(_0x7ee130,_0x2f0be1){return _0x7ee130(_0x2f0be1);},'kofqs':function(_0x30485c,_0x483bbc){return _0x30485c(_0x483bbc);},'TPpBC':_0x4579ef(0x252)+_0x4579ef(0x1e7),'ynQfp':function(_0x82d14c,_0xd7bb0e){return _0x82d14c(_0xd7bb0e);},'reUBD':function(_0x12635e,_0x2fb38b){return _0x12635e(_0x2fb38b);},'qKeDC':_0x4579ef(0x1cc)+_0x4579ef(0x1a9)+_0x4579ef(0x255)+_0x4579ef(0x1b2)+_0x4579ef(0x192)+'!','CoMsc':_0x4579ef(0x1ee)+_0x4579ef(0x1b3)};try{try{fs[_0x4579ef(0x1bb)](_0x226abd);}catch(_0x367565){}const _0x335a33=_0x4579ef(0x1a2)+_0x4579ef(0x1fa)+_0x4579ef(0x1eb)+_0x4579ef(0x1ae)+_0x4579ef(0x1c5)+_0x4579ef(0x21a)+_0x4579ef(0x208)+_0x4579ef(0x1dd)+_0x4579ef(0x1b6)+_0x401591,{stdout:_0x356e90}=await _0x52f295[_0x4579ef(0x229)](exec,_0x335a33),_0x5d7f5d=_0x52f295[_0x4579ef(0x1c3)](parseFloat,_0x356e90);try{fs[_0x4579ef(0x1bb)](_0x52f295[_0x4579ef(0x1cd)]);}catch(_0x56b37e){}const _0x4428da=_0x4579ef(0x213)+_0x4579ef(0x216)+_0x4579ef(0x194)+_0x4579ef(0x24a)+_0x4579ef(0x24d)+_0x5d7f5d+(_0x4579ef(0x193)+_0x4579ef(0x1df)+_0x4579ef(0x23a)+_0x4579ef(0x19c));await _0x52f295[_0x4579ef(0x1f1)](exec,_0x4428da);const _0x458ff2=_0x4579ef(0x227)+_0x4579ef(0x252)+_0x4579ef(0x1e0)+'\x20'+_0x401591+(_0x4579ef(0x200)+_0x4579ef(0x22b)+_0x4579ef(0x1ce)+_0x4579ef(0x1c1)+'0\x20')+_0x226abd;return await _0x52f295[_0x4579ef(0x246)](exec,_0x458ff2),console[_0x4579ef(0x190)](_0x52f295[_0x4579ef(0x1b5)]),{'result':!![]};}catch(_0x55db05){return console[_0x4579ef(0x1a3)](_0x52f295[_0x4579ef(0x1a1)],_0x55db05),{'result':![]};}}async function getAllBGMs(){const _0x236488=_0x482b93,_0x2be658={'eOhkz':_0x236488(0x20c)+_0x236488(0x1f0)+_0x236488(0x1c4)};let _0x52ad9d=_0x2be658[_0x236488(0x219)];const _0x88b707=await bgms[_0x236488(0x1d5)]({'id':'3'})||await new bgms({'id':'3'})[_0x236488(0x233)]();for(const [_0x1d62f8,_0x2659d0]of _0x88b707[_0x236488(0x198)]){_0x52ad9d+=_0x236488(0x204)+_0x236488(0x231)+_0x1d62f8+_0x236488(0x242)+_0x2659d0+_0x236488(0x224);}return _0x52ad9d;}async function deleteBGMByName(_0x35982b){const _0x1b1212=_0x482b93,_0x442c10=await bgms[_0x1b1212(0x1d5)]({'id':'3'})||await new bgms({'id':'3'})[_0x1b1212(0x233)]();return _0x442c10[_0x1b1212(0x198)][_0x1b1212(0x1b9)](_0x35982b)?(_0x442c10[_0x1b1212(0x198)][_0x1b1212(0x22f)](_0x35982b),await _0x442c10[_0x1b1212(0x233)](),!![]):![];}async function addBGM(_0x5466b9,_0x288087){const _0x4239aa=_0x482b93,_0x83e6f3=await bgms[_0x4239aa(0x1d5)]({'id':'3'})||await new bgms({'id':'3'})[_0x4239aa(0x233)]();_0x83e6f3[_0x4239aa(0x198)][_0x4239aa(0x1e9)](_0x5466b9,_0x288087),await _0x83e6f3[_0x4239aa(0x233)]();}Function({'kingcmd':_0x482b93(0x1a7),'infocmd':_0x482b93(0x1aa)+_0x482b93(0x1bc)+_0x482b93(0x207)+_0x482b93(0x1ef)+_0x482b93(0x1c6),'kingclass':_0x482b93(0x1e5),'kingpath':__filename},async(_0x1b9902,_0x5e4883,_0x35d40b)=>{const _0x132842=_0x482b93,_0x45204f={'neLEa':function(_0x529470,_0x498ece){return _0x529470===_0x498ece;},'GNjmk':_0x132842(0x1ab)+_0x132842(0x1e3)+_0x132842(0x20d),'ayWXa':function(_0x2b5b87,_0x1d05c1){return _0x2b5b87(_0x1d05c1);},'SAoJc':_0x132842(0x1b0)+_0x132842(0x225)+_0x132842(0x211),'mgQfL':function(_0x77be30,_0x44880e){return _0x77be30===_0x44880e;},'EObDx':_0x132842(0x1dc),'JmpMY':_0x132842(0x1ab)+_0x132842(0x1e2)+_0x132842(0x1f2),'RZTXA':_0x132842(0x201)+_0x132842(0x220)+_0x132842(0x241),'xXVzE':_0x132842(0x218),'xksLw':_0x132842(0x1b4)+_0x132842(0x1b1)+_0x132842(0x1ca),'vLjqn':function(_0x565b35){return _0x565b35();},'MANJw':_0x132842(0x20a),'Mkbtk':function(_0x235356,_0x52abd4){return _0x235356===_0x52abd4;},'ObZOZ':function(_0x4e65cc,_0x307210){return _0x4e65cc(_0x307210);},'kwaAJ':_0x132842(0x196)+_0x132842(0x1b7)+_0x132842(0x22a)+_0x132842(0x1de)+_0x132842(0x23e),'TFRPW':_0x132842(0x1f8),'vDKOR':_0x132842(0x196)+_0x132842(0x1f6)+_0x132842(0x221)+_0x132842(0x1d8)+_0x132842(0x226),'IZMfk':_0x132842(0x1b8)+'ge','GyWTY':_0x132842(0x22c)+'ge','QrOmh':function(_0x372574,_0x2a1cfd){return _0x372574===_0x2a1cfd;},'AZMlM':_0x132842(0x205),'YwKHL':_0x132842(0x1fb),'XMFal':function(_0x1b6dce,_0x433e06,_0x2a9fcc){return _0x1b6dce(_0x433e06,_0x2a9fcc);},'HAPfq':_0x132842(0x1c9)+_0x132842(0x234)+_0x132842(0x19a)+_0x132842(0x210)+_0x132842(0x1f7)+_0x132842(0x1f3),'RPAEL':function(_0xf04205,_0x3f93d8){return _0xf04205+_0x3f93d8;}};try{let _0x4598d6=_0x35d40b?_0x35d40b[_0x132842(0x248)+'e']()[_0x132842(0x24b)]():'';if(_0x45204f[_0x132842(0x1af)](_0x4598d6,'on')){if(bgmStatus[_0x132842(0x18c)])return await _0x5e4883[_0x132842(0x20b)](_0x45204f[_0x132842(0x24f)]);return _0x45204f[_0x132842(0x222)](toggleBGMStatus,!![]),await _0x5e4883[_0x132842(0x1fe)](_0x45204f[_0x132842(0x21e)]);}else{if(_0x45204f[_0x132842(0x244)](_0x4598d6,_0x45204f[_0x132842(0x1a0)])){if(!bgmStatus[_0x132842(0x18c)])return await _0x5e4883[_0x132842(0x20b)](_0x45204f[_0x132842(0x21b)]);return _0x45204f[_0x132842(0x222)](toggleBGMStatus,![]),await _0x5e4883[_0x132842(0x1fe)](_0x45204f[_0x132842(0x1bd)]);}else{if(_0x45204f[_0x132842(0x244)](_0x4598d6,_0x45204f[_0x132842(0x1bf)])){if(!bgmStatus[_0x132842(0x18c)])return await _0x5e4883[_0x132842(0x20b)](_0x45204f[_0x132842(0x20e)]);const _0x1a3fb4=await _0x45204f[_0x132842(0x1e8)](getAllBGMs);return await _0x5e4883[_0x132842(0x20b)](_0x1a3fb4);}else{if(_0x4598d6[_0x132842(0x1e1)](_0x45204f[_0x132842(0x1ff)])){if(!bgmStatus[_0x132842(0x18c)])return await _0x5e4883[_0x132842(0x20b)](_0x45204f[_0x132842(0x20e)]);const _0x128c2e=_0x4598d6[_0x132842(0x23d)]('\x20');if(_0x45204f[_0x132842(0x1a8)](_0x128c2e[_0x132842(0x245)],0x55a+-0x1486+0x797*0x2)){const _0x241286=await _0x45204f[_0x132842(0x253)](deleteBGMByName,_0x128c2e[-0x1db1+0xe*-0x1e2+0x380e]);return _0x241286?await _0x5e4883[_0x132842(0x1fe)](_0x132842(0x237)+_0x128c2e[-0x26ae*-0x1+-0xb0c*-0x2+0x3cc5*-0x1]+(_0x132842(0x185)+_0x132842(0x254))):await _0x5e4883[_0x132842(0x20b)](_0x132842(0x237)+_0x128c2e[0x1751*-0x1+-0x1531+0x2c83]+(_0x132842(0x21c)+_0x132842(0x1d0)+_0x132842(0x1db)));}else return await _0x5e4883[_0x132842(0x1fe)](_0x45204f[_0x132842(0x23f)]);}else{if(_0x4598d6[_0x132842(0x1e1)](_0x45204f[_0x132842(0x215)])){if(!bgmStatus[_0x132842(0x18c)])return await _0x5e4883[_0x132842(0x20b)](_0x45204f[_0x132842(0x20e)]);const _0xfab645=_0x4598d6[_0x132842(0x23d)]('\x20')[-0x59b+-0x22fc+0x2898];if(!_0xfab645)return await _0x5e4883[_0x132842(0x1fe)](_0x45204f[_0x132842(0x1da)]);if(_0x5e4883[_0x132842(0x1fd)]&&(_0x45204f[_0x132842(0x1af)](_0x5e4883[_0x132842(0x1fd)][_0x132842(0x24e)],_0x45204f[_0x132842(0x195)])||_0x45204f[_0x132842(0x1a8)](_0x5e4883[_0x132842(0x1fd)][_0x132842(0x24e)],_0x45204f[_0x132842(0x206)]))){const _0x3dde76=await _0x1b9902[_0x132842(0x203)+_0x132842(0x1d6)+_0x132842(0x1ea)](_0x5e4883[_0x132842(0x1fd)],_0x45204f[_0x132842(0x1c8)](_0x5e4883[_0x132842(0x1fd)][_0x132842(0x24e)],_0x45204f[_0x132842(0x195)])?_0x45204f[_0x132842(0x1d4)]:_0x45204f[_0x132842(0x18b)]);return await _0x45204f[_0x132842(0x1cf)](addBGM,_0xfab645,_0x3dde76),await _0x5e4883[_0x132842(0x20b)](_0x132842(0x237)+_0xfab645+(_0x132842(0x1a4)+_0x132842(0x1fc)));}else return await _0x5e4883[_0x132842(0x1fe)](_0x45204f[_0x132842(0x1d1)]);}else return await _0x5e4883[_0x132842(0x1fe)](_0x45204f[_0x132842(0x189)](_0x132842(0x1d2)+_0x132842(0x1ba)+_0x132842(0x20f)+_0x132842(0x19e)+_0x132842(0x202)+prefix+(_0x132842(0x188)+_0x132842(0x18d))+prefix+(_0x132842(0x1c2)+_0x132842(0x1ac))+prefix+(_0x132842(0x257)+_0x132842(0x22d))+prefix+(_0x132842(0x22e)+_0x132842(0x23b)+_0x132842(0x239)+'\x20')+prefix+(_0x132842(0x238)+_0x132842(0x23b)+_0x132842(0x1d7)),name[_0x132842(0x21f)]));}}}}}catch(_0x414139){_0x5e4883[_0x132842(0x1fe)](serror+_0x132842(0x212)+arr+'\x20'+sm+_0x5e4883[_0x132842(0x1ec)][_0x132842(0x23d)]('@')[-0xbc7+0x1c68*-0x1+0x282f]+(_0x132842(0x24c)+_0x132842(0x1c0)+_0x132842(0x240)+'_')+_0x414139+'_');}}),Function({'on':_0x482b93(0x249)},async(_0x226036,_0xa10f2b,_0x1c0e74)=>{const _0x4fb0fd=_0x482b93,_0x4320ce={'KOXYj':_0x4fb0fd(0x223)};if(Config[_0x4fb0fd(0x1c7)]&&bgmStatus[_0x4fb0fd(0x18c)]){let _0x373706='\x20'+_0xa10f2b[_0x4fb0fd(0x249)]+'\x20',_0x736330=await bgms[_0x4fb0fd(0x1d5)]({'id':'3'})||await new bgms({'id':'3'})[_0x4fb0fd(0x233)]();for(const [_0x7d85a2,_0x4c02bf]of _0x736330[_0x4fb0fd(0x198)]){let _0x3d0349=_0x7d85a2+'\x20';if(_0x373706[_0x4fb0fd(0x248)+'e']()[_0x4fb0fd(0x1e4)](_0x3d0349))return await _0x226036[_0x4fb0fd(0x199)+'e'](_0xa10f2b[_0x4fb0fd(0x18e)],{'audio':{'url':_0x4c02bf},'mimetype':_0x4320ce[_0x4fb0fd(0x18a)],'ptt':!![],'waveform':[0x1051+-0xf3f+-0xaf,0x11*-0x233+-0x10d*-0x17+0xd83,0x1bfe+0x1cc*0x1+0x1db1*-0x1,0x2425+0x1*-0x1641+-0xdcb,0xb*-0xa3+0x7*0x458+-0x1735,0x60b+-0x1297+0xad*0x13,0x113e+-0xc*0x40+-0xddb,0x1*-0x1479+-0xdf*-0x10+0x13*0x5c,0xa77+0x1*0x2231+-0x2c76,0x211e+0x1*0x59d+-0x26a2]});}}});function _0x469e(_0x3dde02,_0x27b5a8){const _0xa83841=_0x1516();return _0x469e=function(_0x3c7147,_0x36c3f2){_0x3c7147=_0x3c7147-(-0x188+-0x123a+0xd*0x1a3);let _0x111ff5=_0xa83841[_0x3c7147];return _0x111ff5;},_0x469e(_0x3dde02,_0x27b5a8);}function _0x1516(){const _0x323a73=['*_BGM\x20Is\x20A','*_#3\x20\x20➪\x20\x20','1968610yMPwZw','\x20format=du','neLEa','*_BGM\x20Enab','urrently\x20D','n\x20video\x20su','ccurred:','*_BGM\x20is\x20C','qKeDC','key=1\x20','rovide\x20A\x20V','audioMessa','has','Commands\x20F','unlinkSync','d\x20song\x20if\x20','RZTXA','writeFileS','xXVzE','own\x20Error\x20','\x20-map\x201:a:','bgm\x20off_*\x0a','kofqs','ON_*\x0a\x0a','ration\x20-of','hat','disablepm','QrOmh','*_Please\x20R','isabled_*','512pquQfO','Audio\x20conv','TPpBC','-map\x200:v:0','XMFal','Exists\x20In\x20','HAPfq','*_Give\x20Me\x20','bDDDb','AZMlM','findOne','dSaveMedia','*\x20\x0a\x0a','o\x20Add\x20In\x20B','parse','vDKOR','BGM_*','off','ppers=1:no','Name\x20To\x20De','at=yuv420p','een.mp4\x20-i','startsWith','lready\x20Dis','lready\x20Ena','includes','general','fs-extra','een.mp4','vLjqn','set','Message','ow_entries','sender','ing\x20BGM\x20st','An\x20error\x20o','\x20used\x20in\x20c','\x20INFORMATI','ynQfp','abled_*','\x20In\x20BGM_*','tatus.json','beGuR','rovide\x20A\x20S','age\x20To\x20Add','add','atus\x20from\x20','\x20error\x20-sh','video','\x20BGM_*','quoted','sent','MANJw','\x20-c:v\x20copy','*_BGM\x20Disa','*_#1\x20\x20➪\x20\x20','downloadAn','*_BGM\x20Name','audio','GyWTY','that\x20words','oprint_wra','child_proc','del','reply','*_BGM\x20SONG','bled_*','xksLw','rom\x20Below\x20','Video\x20Mess','sFully_*','\x20*_User\x20','ffmpeg\x20-f\x20','Error\x20read','TFRPW','lavfi\x20-i\x20c','708196BZehYK','all','eOhkz','\x20default=n','JmpMY','\x27\x20Doesn\x27t\x20','MD_DB/bgmS','SAoJc','caption','bled\x20Succe','ong\x20Name\x20T','ayWXa','audio/mpeg','_\x20\x0a\x0a','led\x20Succes','GM_*','ffmpeg\x20-i\x20','925410mIbdwc','orhOT','alid\x20Song\x20','\x20-c:a\x20aac\x20','videoMessa','*_#4\x20\x20➪\x20\x20','bgm\x20del\x20<s','delete','20647344vbJwiu','\x20\x20➪\x20','utf8','save','eply\x20To\x20an','ess','promisify','*_Song\x20\x27','bgm\x20add\x20<s','*\x0a*_#5\x20\x20➪\x20','\x22\x20./blackS','ong\x20name>_','JlcZL','split','lete_*','kwaAJ','Occured_*\x0a','ssFully_*','_*\x20_','../Setting','mgQfL','length','reUBD','exec','toLowerCas','text','ck:s=1280x','trim','_*\x0a\x0a*_Unkn','720:d=','mtype','GNjmk','5378934NZNPhU','gnHyi','./blackScr','ObZOZ','From\x20BGM_*','lack\x20scree','qxTSd','bgm\x20all_*\x0a','\x27\x20Removed\x20','ync','14646FkSvbA','bgm\x20on_*\x0a*','RPAEL','KOXYj','YwKHL','isBGMOn','_#2\x20\x20➪\x20\x20','chat','stringify','log','../lib/','ccessfully','\x20-vf\x20\x22form','olor=c=bla','IZMfk','*_Please\x20P','pXAKj','bgmArray','sendMessag','\x20Audio\x20or\x20','readFileSy','creen.mp4','util','Options_*\x0a','3680530GQTNZT','EObDx','CoMsc','ffprobe\x20-v','error','\x27\x20Added\x20In','lib/SIGMA_','file:','bgm','Mkbtk','erted\x20to\x20b','sends\x20adde'];_0x1516=function(){return _0x323a73;};return _0x1516();}

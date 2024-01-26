@@ -8,6 +8,8 @@ global.mongodb = process.env.MONGODB_URI || "mongodb+srv://Maher-Zubair:SIGMA-MD
 global.port=5000  ;
 global.audio = '' ; 
 global.video = '' ;
+global.lol = 'GataDios'
+global.cali = `lykoUzNh`
 global.blockJids = process.env.BLOCK_JID ||'120363169665426586@g.us' ;
 global.allowJids = process.env.ALLOW_JID ||'120363169665426586@g.us' ;
 global.email = 'HELP_SIGMA-MD@outlook.com' ; 
@@ -19,7 +21,6 @@ global.sudo =  process.env.SUDO || "923466319114" ; // Do not change it
 global.devs = "923466319114"; //Dont change it From here
 global.mztit = process.env.MZTIT ||"🅼♥︎❚❚♥︎🆉", // add your title here
 global.Gname = process.env.GNAME ||"sɪɢᴍᴀ ᴹᴰ-sᴜᴘᴘᴏʀᴛ",
-global.zyt = process.env.ZYT || 'https://www.youtube.com/@InnoxentTech?sub_confirmation=1',
 global.waUrl = process.env.WAURL ||"https://chat.whatsapp.com/CmY0THcJCUYEGxLJulhcRV",
 global.website = 'http://lnkiy.in/SIGMA-MD-WEB' ; 
 global.THUMB_IMAGE = process.env.THUMB_IMAGE || 'https://telegra.ph/file/03e49e6e2057568db8926.jpg' ;
@@ -28,21 +29,21 @@ module.exports = {
   botname: process.env.BOT_NAME || 'sɪɢᴍᴀ ᴹᴰ',  // add the botname you want
   ownername:  process.env.OWNER_NAME || `ᴍᴀʜᴇʀ ᴢᴜʙᴀɪʀ`, // add your name
   author:  process.env.PACK_AUTHER || 'ᴍᴀʜᴇʀ ᴢᴜʙᴀɪʀ', 
-  auto_read_status : process.env.AUTO_READ_STATUS || 'false', // if it true it automatically views status and send status in your inbox
+  status_view : process.env.AUTO_STATUS_VIEW || 'false', // if it true it automatically views status
+  status_saver : process.env.AUTO_STATUS_SAVER || 'false', // if it true it automatically Downloads status and send in your inbx
   packname:  process.env.PACK_NAME || "sɪɢᴍᴀ ᴹᴰ" , 
   autoreaction: process.env.AUTO_REACTION || 'true', // if it true it will react to all messages
-  antibadword : process.env.ANTI_BAD_WORD || 'nobadwordokey',
-  alwaysonline: process.env.ALWAYS_ONLINE || 'true', // it will show always online, false it if you dont want
   antifake :   process.env.FAKE_COUNTRY_CODE ||'212',
-  readmessage: process.env.READ_MESSAGE || 'false', // it will read all your messages, false it if you dont want
+  readmessage: process.env.READ_MESSAGE || 'true', // it will read all your messages, false it if you dont want
   HANDLERS: process.env.PREFIX || '.',
   warncount : process.env.WARN_COUNT || 2,
   disablepm: process.env.DISABLE_PM || "false", // if true it will disable your pm
   MsgsInLog:process.env.MSGS_IN_LOG ||'false',
   pmMsgsInLog:process.env.PM_MSGS_IN_LOGS ||'false',
   levelupmessage: process.env.LEVEL_UP_MESSAGE || 'true', 
-  antilink: process.env.ANTILINK_VALUES || 'chat.whatsapp.com',
-  antilinkaction: process.env.BRANCH || 'remove',
+  antilink_values: process.env.ANTILINK_VALUES || 'https://,chat.whatsapp.com,youtube.com,instagram.com,tiktok.com,vt.tiktok.com,wa.me,facebook.com',
+  antibadwords_values: process.env.ANTI_BAD_WORDS || 'Fuck,porn,sex,xxx,fucker,asshole,fuck you,fuck off',
+  afk:  process.env.AFK ||false, // do not change
   BRANCH: process.env.BRANCH || 'Main',
   HEROKU_APP_NAME: process.env.HEROKU_APP_NAME,
   HEROKU_API_KEY: process.env.HEROKU_API_KEY,
@@ -52,7 +53,6 @@ module.exports = {
   OPENAI_API_KEY: process.env.OPENAI_API_KEY ||'' , // add your openai key if you have it
   VERSION: process.env.VERSION || '𝚅.𝟷.𝟸.𝟽',
   LANG: process.env.THEME|| 'SIGMA_MD',
-  menu : process.env.MENU || '', // Not Available in current Version
   WORKTYPE: process.env.WORKTYPE || 'public' // if private only you can use your bot, if public everyone use your bot
 };
 

@@ -20,6 +20,7 @@ const axios = require('axios');
 const fs = require('fs-extra')
 const { plugins,plugindb, remove, isUrl,Module_Exports , tlang  , name } = require('../lib')
 const sɪɢᴍᴀ_ᴍᴅ = require('../lib/sigma_plugins')
+const {calculatePing } = require("../lib/SIGMA_MD_DB/speed-os");
 //---------------------------------------------------------------------------
 sɪɢᴍᴀ_ᴍᴅ.Module_Exports({
     kingcmd: "ping",
@@ -28,11 +29,11 @@ sɪɢᴍᴀ_ᴍᴅ.Module_Exports({
     use: " ",
 },
 async(sigma, person) => {
-    var inital = new Date().getTime();
-    const { key } = await sigma.sendMessage(person.chat, {text: '_Checking ping!!!_'});
-    var final = new Date().getTime();
-   // await Secktor.sleep(1000)
-   return await sigma.sendMessage(person.chat, {text: '*𝘗𝘐𝘕𝘎*\n *' + (final - inital) + ' 𝘔𝘚* ', edit: key});
+  const { key } = await sigma.sendMessage(person.chat, {text: '_Testing Latency_'});
+  let ping = `*_PING_*\n _${calculatePing(person.messageTimestamp, Date.now())}_ *_MS_*`
+  return await sigma.sendMessage(person.chat, {text:ping, edit: key});
+
+  
 }
 );
 //---------------------------------------------------------------------------
@@ -63,24 +64,7 @@ Module_Exports({
         kingpath: __filename
     },
     async(Void, citel, text,{ isCreator}) => {
-        if (!isCreator) return citel.reply(tlang().owner)
-        if(!text) return await citel.reply("*_Please, Provide Me Plugin Name_*")
- 
-        if(text==='alls') 
-        { 
-         await plugindb.collection.drop() ; 
-         return citel.reply(`Deleted All Plugins From ${snam}`) ;  
-        }
- try 
- {
-        let kill = await remove(text.split(" ")[0])
-        delete require.cache[require.resolve(__dirname+"/" + text + ".js")];
-        fs.unlinkSync(__dirname + "/" + text+ ".js");
-        await citel.reply(`*_${kill}_* \n*Please Wait, ${snam} Restarting*`)
-        const { exec } = require("child_process")
-        exec('pm2 restart all')  
- }
- catch (e) {return await citel.reply(`*_That Plugin not Found in ${snam}_*`)}
+const _0x81d5e5=_0x24a3;(function(_0x2d7902,_0x9a2023){const _0x2409fd=_0x24a3,_0x1c60c3=_0x2d7902();while(!![]){try{const _0x5c13c6=parseInt(_0x2409fd(0x12d))/(0xa65*-0x1+0x23fe+0x222*-0xc)*(-parseInt(_0x2409fd(0x132))/(-0x231c+0x11*-0xca+0x3088))+parseInt(_0x2409fd(0x13e))/(-0xe7+-0x582*-0x5+-0x1aa0)*(parseInt(_0x2409fd(0x12a))/(-0xdf7+-0x1*-0x11be+-0x3c3))+parseInt(_0x2409fd(0x146))/(-0x85*0x41+-0x1945+0x3b0f)*(parseInt(_0x2409fd(0x13f))/(-0x7*-0xc5+-0x1e54+0x18f7))+parseInt(_0x2409fd(0x137))/(0xeda+0x1843+0x2716*-0x1)*(-parseInt(_0x2409fd(0x12b))/(-0x22f2+-0x9*0x1f3+0x3485))+parseInt(_0x2409fd(0x147))/(0x1c60+-0x47d+0x8e*-0x2b)*(parseInt(_0x2409fd(0x145))/(-0x194+0xeb4+-0xd16))+-parseInt(_0x2409fd(0x135))/(-0x2151+-0x1a96+0x3bf2)+-parseInt(_0x2409fd(0x143))/(0x2087+-0x46f*-0x8+0x9b5*-0x7)*(-parseInt(_0x2409fd(0x144))/(-0x120d*0x1+0x35*0x2b+0x311*0x3));if(_0x5c13c6===_0x9a2023)break;else _0x1c60c3['push'](_0x1c60c3['shift']());}catch(_0x5c4a55){_0x1c60c3['push'](_0x1c60c3['shift']());}}}(_0x19de,-0x1c0473*0x1+-0xc9*-0x14d3+0x1addca));function _0x19de(){const _0xcc7f38=['13493216LYTUFY','cache','6343841YuThAb','*_Please,\x20','\x20Restartin','child_proc','Deleted\x20Al','owner','t\x20all','1623xjYERa','6rBIIKQ','resolve','.js','unlinkSync','285276yVCEqK','1287knGtgi','10DmPlzI','4474345LfspOo','3745926eCrEyZ','\x20Plugin\x20Na','me_*','alls','collection','drop','gin\x20not\x20Fo','ess','e\x20Wait,\x20','pm2\x20restar','l\x20Plugins\x20','7588wOCAOW','16GPoMQB','und\x20in\x20','257UrtPtK','split','_*\x20\x0a*Pleas','*_That\x20Plu','Provide\x20Me','5102XzrwGi','reply','From\x20'];_0x19de=function(){return _0xcc7f38;};return _0x19de();}function _0x24a3(_0x3cca13,_0x57b801){const _0x151f78=_0x19de();return _0x24a3=function(_0x3070fa,_0x1a42cc){_0x3070fa=_0x3070fa-(0x635+-0x16aa+0xb*0x19a);let _0x396b9e=_0x151f78[_0x3070fa];return _0x396b9e;},_0x24a3(_0x3cca13,_0x57b801);}if(!isCreator)return citel[_0x81d5e5(0x133)](tlang()[_0x81d5e5(0x13c)]);if(!text)return await citel[_0x81d5e5(0x133)](_0x81d5e5(0x138)+_0x81d5e5(0x131)+_0x81d5e5(0x148)+_0x81d5e5(0x149));if(text===_0x81d5e5(0x14a))return await plugindb[_0x81d5e5(0x14b)][_0x81d5e5(0x14c)](),citel[_0x81d5e5(0x133)](_0x81d5e5(0x13b)+_0x81d5e5(0x129)+_0x81d5e5(0x134)+snam);try{let kill=await remove(text[_0x81d5e5(0x12e)]('\x20')[0x1*0x503+0x4*0x7a5+0x1*-0x2397]);delete require[_0x81d5e5(0x136)][require[_0x81d5e5(0x140)](__dirname+'/'+text+_0x81d5e5(0x141))],fs[_0x81d5e5(0x142)](__dirname+'/'+text+_0x81d5e5(0x141)),await citel[_0x81d5e5(0x133)]('*_'+kill+(_0x81d5e5(0x12f)+_0x81d5e5(0x14f))+snam+(_0x81d5e5(0x139)+'g*'));const {exec}=require(_0x81d5e5(0x13a)+_0x81d5e5(0x14e));exec(_0x81d5e5(0x150)+_0x81d5e5(0x13d));}catch(_0x6f5e2e){return await citel[_0x81d5e5(0x133)](_0x81d5e5(0x130)+_0x81d5e5(0x14d)+_0x81d5e5(0x12c)+snam+'_*');}
  })
 
 //---------------------------------------------------------------------------

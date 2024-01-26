@@ -77,7 +77,7 @@ Module_Exports({
                             .save()
                         return citel.reply("Successfully Enabled *Events*")
                     } else {
-                        if (checkgroup.events == "true") return citel.reply("_*Events are Already Enabled_*")
+                        if (checkgroup.events == "true") return citel.reply("*_Events are Already Enabled_*")
                         await sck.updateOne({ id: citel.chat }, { events: "true" })
                         return citel.reply("Successfully Enabled *Events*")
                     }

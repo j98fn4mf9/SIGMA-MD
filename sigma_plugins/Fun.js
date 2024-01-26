@@ -237,6 +237,35 @@ await sleep(1000)
 
     )
 
+    Function({
+        kingcmd: "teddy",
+        fromMe: true, 
+        infocmd: "send Teddy To Yur Love",
+        kingclass: "fun"
+    
+    },
+    async(sigma, man)=>{
+    let emo =  ['❤', '💕', '😻', '🧡', '💛', '💚', '💙', '💜', '🖤', '❣', '💞', '💓', '💗', '💖', '💘', '💝', '💟', '♥', '❣️', '💖', '💘', '❤️', '💟', '🤍', '💓', '😍', '😘', '💚', '❤️'];
+    const {key} = await man.reply("*_This IS FOr YOu_*")
+    
+      for (const emoji of emo) {
+      
+     await new Promise(res => setTimeout(res,2000));
+     
+      let x = ""
+     let teddy = `
+    *(\\_/)*
+    *( •.•)*
+    */>*🤍`; 
+    
+    teddy = teddy.replace("🤍", emoji)
+      x = x + teddy;
+        
+       await sigma.sendMessage(man.chat, {text: x, edit: key})
+      }
+
+      
+    })
 // These Fun Commands are Developed By @Maher-Zubair
 // Whatsapp +923466319114
 // Usage And CopyRights Are Reserved

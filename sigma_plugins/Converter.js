@@ -143,6 +143,63 @@ let media  = await getBuffer(url)
         }
     )
     //---------------------------------------------------------------------------
+    Module_Exports(
+        {
+            kingcmd: "steal",
+            //shortcut: ["s"],
+            infocmd: "Makes sticker of replied image/video.",
+            kingclass: "sticker",
+            kingpath: __filename,
+            use: 'reply to any image/video'
+        },
+        async (sigma, citel, text) => {
+            let mime = citel.mtype;
+            let media;
+            let pack;
+            let author;
+    
+            if (text && text.includes(';')) {
+                // If text is provided and contains a semicolon, use it to set pack and author
+                [pack, author] = text.split(';');
+            } else if(!pack || !author) return await citel.sent(`*Please reply to a sticker. Example: ${prefix}steal Maher;Zubair*`); {
+                // Use default values if no text or no semicolon is provided
+                
+            } 
+    
+            if (mime === "imageMessage" || mime === "videoMessage") {
+                media = await citel.download();
+            } else if (citel.quoted) {
+                mime = citel.quoted.mtype;
+                if (mime === "imageMessage" || mime === "videoMessage" || mime === "stickerMessage") {
+                    media = await citel.quoted.download();
+                } else {
+                    return citel.reply("```Uhh, Please reply to any image, video, or sticker```");
+                }
+            } else {
+                return citel.reply("```Uhh, Please reply to any image, video, or sticker```");
+            }
+    
+            if (mime === "videoMessage") {
+                let caption = { packname: pack, author: author };
+                const { writeExifVid } = require("../lib/exif.js");
+                let buffer = await writeExifVid(media, caption);
+                return await sigma.sendMessage(citel.chat, { sticker: { url: buffer } });
+            }
+    
+            let sticker = new Sticker(media, {
+                pack: pack,
+                author: author,
+                type: StickerTypes.FULL,
+                categories: ["🤩", "🎉"],
+                id: "12345",
+                quality: 100,
+                background: "transparent",
+            });
+    
+            const buffer = await sticker.toBuffer();
+            return sigma.sendMessage(citel.chat, { sticker: buffer }, { quoted: citel });
+        }
+    );
  //---------------------------------------------------------------------------
 Module_Exports({
             kingcmd: "stiker",

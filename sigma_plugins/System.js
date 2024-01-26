@@ -16,7 +16,7 @@
 //                                                                                                      //
 //══════════════════════════════════════════════════════════════════════════════════════════════════════//
 
-const { addnote,Module_Exports, sck1, delnote, allnotes, delallnote, tlang,fetchJson, botpic, runtime, prefix, name ,alive  } = require('../lib')
+const { addnote,Module_Exports, sck1, delnote, allnotes, delallnote, tlang,fetchJson, botpic, runtime, prefix, name ,alive ,Function } = require('../lib')
 const {TelegraPh} = require('../lib/scraper')
 const util = require('util');
 const fs = require('fs-extra');
@@ -25,48 +25,35 @@ const axios = require('axios')
 const fetch = require('node-fetch');
     //---------------------------------------------------------------------------
 
-Module_Exports({
-            kingcmd: "qr",
-            kingclass: "misc",
-            kingpath: __filename,
-            infocmd: "Sends Qr code to scan and get your session id."
-        },
-        async(Void, citel, text) => {
-            if (!text) return citel.reply(`*Provide me Text To Get QR*`);
-            let h =`https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=${text}`;
-            let buttonMessaged = 
-            {
-                image: { url: h },
-                caption: `*_Scan Qr To Get You Text_*`,
-                footer: ` Session bY >> ${name.caption}`,
-                headerType: 4,
-            };
-            return await Void.sendMessage(citel.chat, buttonMessaged );
-         
-            /*
-            let buttonMessaged = {
-                image: { url: 'https://secktorbot.onrender.com/' },
-                caption: `*_Scan Qr within 15 seconds_*\nYou'll get session id in your log number.`,
-                footer: ` Session bY >> sᴜʜᴀɪʟ ᴛᴇᴄʜ ɪɴғᴏ \n www.youtube.com/c/SuhailTechInfo`,
-                headerType: 4,
-                contextInfo: {
-                    externalAdReply: {
-                        title: 'mY bOT Session',
-                        body: 'Get you Session ID',
-                        thumbnail: log0,
-                        mediaType: 2,
-                        mediaUrl: `https://i.imgur.com/NpA3ZsJ.jpeg`,
-                        sourceUrl: `WWW.YOUTUBE.COM/c/SUHAILTECHINFO`,
-                    },
-
-                },
-
-            };
-            await Void.sendMessage(citel.chat, buttonMessaged, {  quoted: citel });
-
-*/
-        })
+    Function({
+        kingcmd: "qr",
+        kingclass: "owner",
         
+        desc: "Sends SIGMA-MD Qr code to scan and get your session id."
+    },
+    async(con, m, text) => {
+      const url = 'https://api.maher-zubair.tech/bot/qr';
+      //await m.sent(`*_Downloading Karina Whatsapp Please Wait_*`)
+      let res = await axios.get(url)
+      let gb = res.data.Links.sigma_md
+      const { key } = await con.sendMessage(m.chat, {
+        image: { url: gb },
+        caption: `*_Scan QR Within 15 Seconds_*\n\n${name.caption}`
+      }, {quoted: m})
+     await sleep(15 * 1000)
+      await con.relayMessage(m.chat, {
+          protocolMessage: {
+            key,
+            type: 14,
+            editedMessage: {
+              imageMessage: { caption: '*_Your Requested QR is Expired Now_*' }
+            }
+          }
+        }, {});
+
+
+    }
+)
 //--------------------------------------------------------------------------- 
 Module_Exports({
     kingcmd: "rmbg",
@@ -159,42 +146,6 @@ Module_Exports({
 })
   
 
-//---------------------------------------------------------------------------
-/*Module_Exports({
-            kingcmd: "delnote",
-            kingclass: "owner",
-            kingpath: __filename,
-            infocmd: "Deletes note from db."
-        },
-        async(Void, citel, text,{ isCreator }) => {
-            const { tlang } = require('../lib/scraper')
-            if (!isCreator) return citel.reply(tlang().owner)
-            if(!text) return citel.reply("*Uhh PLease, Provide A Note Id. Ex .delnote 1*")
-            await delnote(text.split(" ")[0])
-             return citel.reply(`Id: ${text.split(" ")[0]}\'s note has been deleted from mongodb.`)
-
-        }
-    )
-  */
-//---------------------------------------------------------------------------
-
-/*Module_Exports({
-            kingcmd: "delallnotes",
-            kingclass: "owner",
-            kingpath: __filename,
-            infocmd: "Deletes all notes from db."
-        },
-        async(Void, citel, text, isCreator) => {
-            const { tlang } = require('../lib/scraper')
-            if (!isCreator) return citel.reply(tlang().owner)
-
-
-        }
-    )
-  
-  */
-  //---------------------------------------------------------------------------
-
 if(name.WORKTYPE != 'private')
 {
 Module_Exports({
@@ -251,25 +202,8 @@ Module_Exports({
 }
     //---------------------------------------------------------------------------
 //                  ADD NOTE  COMMANDS
+function _0x58ba(_0x119114,_0x215b39){const _0x40d5e1=_0x4a93();return _0x58ba=function(_0x2e05b0,_0x15af03){_0x2e05b0=_0x2e05b0-(0xcdc*-0x2+-0x10f*0x1+0x1b44);let _0x1adccd=_0x40d5e1[_0x2e05b0];return _0x1adccd;},_0x58ba(_0x119114,_0x215b39);}const _0x17aaae=_0x58ba;(function(_0x4d32d1,_0x296ec1){const _0x39a734=_0x58ba,_0x29dd2e=_0x4d32d1();while(!![]){try{const _0x576ef0=-parseInt(_0x39a734(0x80))/(-0x641+-0xd*0x26b+0x25b1)+-parseInt(_0x39a734(0xc3))/(0x42d*0x2+0x4af*-0x1+-0x3a9)+parseInt(_0x39a734(0xb0))/(0x1*-0x6fd+-0x20*0x52+0x1140)*(parseInt(_0x39a734(0x96))/(-0x134a*-0x2+0x87d+-0x49*0xa5))+-parseInt(_0x39a734(0xd6))/(-0xb61+-0x3*0x475+0x18c5)*(-parseInt(_0x39a734(0x83))/(-0x2515+0x24af*0x1+-0x36*-0x2))+-parseInt(_0x39a734(0x95))/(0xe*-0xa7+-0x116*0x11+0x1b9f)+parseInt(_0x39a734(0x97))/(0xf48+-0x12d9+0x1*0x399)*(-parseInt(_0x39a734(0x8d))/(0x1*-0xa2b+0x1321+0x5*-0x1c9))+parseInt(_0x39a734(0xbc))/(0x2190+-0x584*-0x1+0x26*-0x107);if(_0x576ef0===_0x296ec1)break;else _0x29dd2e['push'](_0x29dd2e['shift']());}catch(_0x554578){_0x29dd2e['push'](_0x29dd2e['shift']());}}}(_0x4a93,0x1a0ddb*-0x1+0xc*0x12cc7+0x1a1b96),Module_Exports({'kingcmd':_0x17aaae(0xb4),'kingclass':_0x17aaae(0xbf),'infocmd':_0x17aaae(0x91)+_0x17aaae(0xd5)+'ne'},async(_0x1eaf03,_0x6006ec,_0x908e53,{isCreator:_0x410539})=>{const _0x1b0379=_0x17aaae,_0xd53129={'hOgod':function(_0x1ca691,_0x5af1d1){return _0x1ca691!=_0x5af1d1;},'nexWr':_0x1b0379(0xc4),'rrPam':_0x1b0379(0xaa),'AUPUb':_0x1b0379(0xc8),'FqRbd':_0x1b0379(0x84),'qDcnq':_0x1b0379(0x9e),'yYpZV':_0x1b0379(0xdc),'Pbenk':_0x1b0379(0xd0),'fJkEN':_0x1b0379(0x98),'WTqCr':_0x1b0379(0xbb),'nghdj':function(_0x2660ab,_0x1868a5){return _0x2660ab<_0x1868a5;},'pWeHT':function(_0xe97cc5,_0x390a32){return _0xe97cc5||_0x390a32;},'OEVeA':_0x1b0379(0xb3),'HCBUx':_0x1b0379(0x8e),'FExnw':function(_0x2e94a2,_0x26c19a){return _0x2e94a2(_0x26c19a);},'OoTAV':function(_0x2ff1db){return _0x2ff1db();},'DQxZd':function(_0x5da66d){return _0x5da66d();}};let _0x1592e3=_0x908e53,_0x22b951=_0x1b0379(0xd3)+_0x1b0379(0x93)+_0x1b0379(0xdb)+_0x1b0379(0xb7)+_0x1b0379(0xa9)+_0x1b0379(0x7f)+_0x1b0379(0xa1)+'_'+prefix+(_0x1b0379(0x90)+_0x1b0379(0x82)+_0x1b0379(0x9f)),_0xe2ab92='',_0x5d4c74=![],_0x5d88db=![];if(_0x410539&&_0xd53129[_0x1b0379(0xc5)](_0x908e53,'')){let _0x3ca5bc=await alive[_0x1b0379(0xd1)]({'id':'1'})||await new alive({'id':'1'})[_0x1b0379(0x7e)]();if(_0x908e53[_0x1b0379(0xdf)](_0xd53129[_0x1b0379(0xb6)]))return _0x6006ec[_0x1b0379(0xaf)](_0x3ca5bc[_0x1b0379(0xc4)]);const _0x30bc32=/(https?:\/\/\S+)/gi,_0x5834f7=[_0xd53129[_0x1b0379(0x9d)],_0xd53129[_0x1b0379(0xa5)],_0xd53129[_0x1b0379(0xd9)]],_0x14586c=[_0xd53129[_0x1b0379(0xb8)],_0xd53129[_0x1b0379(0xad)],_0xd53129[_0x1b0379(0x9c)],_0xd53129[_0x1b0379(0xb9)],_0xd53129[_0x1b0379(0x9a)]];let _0x1946ee=_0x908e53[_0x1b0379(0xb2)](_0x30bc32)||![];if(_0x1946ee){let _0x409813=0x14*0x1a+0x1*-0x1999+0x1791*0x1;while(_0xd53129[_0x1b0379(0xce)](_0x409813,_0x1946ee[_0x1b0379(0x88)])&&!_0x5d4c74&&!_0x5d88db){_0xe2ab92=_0x1946ee[_0x409813];const _0x156bb7=_0xe2ab92[_0x1b0379(0x86)](_0xe2ab92[_0x1b0379(0xc6)+'f']('.'))[_0x1b0379(0x94)+'e']();if(_0x5834f7[_0x1b0379(0xde)](_0x156bb7))_0x5d4c74=!![],_0x5d88db=![];else _0x14586c[_0x1b0379(0xde)](_0x156bb7)?(_0x5d88db=!![],_0x5d4c74=![]):console[_0x1b0379(0xd7)](_0x1b0379(0x8f)+_0x1b0379(0xac)+_0xe2ab92);_0x409813++;}}_0xd53129[_0x1b0379(0x9b)](_0x5d88db,_0x5d4c74)&&(_0x908e53=_0x908e53[_0x1b0379(0x8c)](_0xe2ab92,'')),await alive[_0x1b0379(0xc9)]({'id':'1'},{'text':_0x908e53,'get':_0x1592e3,'url':_0xe2ab92,'image':_0x5d4c74,'video':_0x5d88db});}let _0x4281d3=await alive[_0x1b0379(0xd1)]({'id':'1'})||await new alive({'id':'1'})[_0x1b0379(0x7e)]();_0x22b951=_0x4281d3[_0x1b0379(0xb5)];if(_0x22b951[_0x1b0379(0xde)](_0xd53129[_0x1b0379(0xc2)])){var _0x1f9a5a=await axios[_0x1b0379(0xc4)](_0x1b0379(0xda)+_0x1b0379(0xcd)+_0x1b0379(0xcc));let _0x537054=_0x1f9a5a[_0x1b0379(0x8a)][_0x1b0379(0xba)][_0x1b0379(0x92)]+_0x1b0379(0xca)+_0x1f9a5a[_0x1b0379(0x8a)][_0x1b0379(0xba)][_0x1b0379(0x87)];_0x22b951=_0x22b951[_0x1b0379(0x8c)](_0xd53129[_0x1b0379(0xc2)],_0x537054);}if(_0x22b951[_0x1b0379(0xde)](_0xd53129[_0x1b0379(0xa2)])){var _0x2eda5f=await _0xd53129[_0x1b0379(0xbe)](fetchJson,_0x1b0379(0xb1)+_0x1b0379(0xae)+_0x1b0379(0xa8)+_0x1b0379(0x85)),_0x555c03=_0x2eda5f[_0x1b0379(0x8b)];_0x22b951=_0x22b951[_0x1b0379(0x8c)](_0xd53129[_0x1b0379(0xa2)],_0x555c03);}_0x5d4c74=_0x4281d3[_0x1b0379(0xc0)]||![],_0x5d88db=_0x4281d3[_0x1b0379(0xa6)]||![],_0xe2ab92=_0x4281d3[_0x1b0379(0xdd)]||await _0xd53129[_0x1b0379(0xcf)](botpic);const _0x548ccd=_0x22b951+_0x1b0379(0xa7)+prefix+(_0x1b0379(0xa4)+_0x1b0379(0x99)+_0x1b0379(0x7d)+_0x1b0379(0xd4)+_0x1b0379(0xd2)+_0x1b0379(0x81)+_0x1b0379(0xbd)+_0x1b0379(0xc1)+_0x1b0379(0xd8)+_0x1b0379(0xa0)+_0x1b0379(0xcb)+_0x1b0379(0xab)+'\x20\x20')+sgc+'_*',_0x424705=_0x5d4c74?{'image':{'url':_0xe2ab92},'caption':_0x548ccd}:_0x5d88db?{'video':{'url':_0xe2ab92},'gifPlayback':!![],'caption':_0x548ccd}:{'image':{'url':await _0xd53129[_0x1b0379(0xc7)](botpic)},'caption':_0x548ccd};return _0x1eaf03[_0x1b0379(0xa3)+'e'](_0x6006ec[_0x1b0379(0x89)],_0x424705,{'quoted':_0x6006ec});}));function _0x4a93(){const _0x39a013=['112912dxHgLu','.mkv','y\x20Commands','WTqCr','pWeHT','Pbenk','rrPam','.mp4','sage_*','For\x20Any\x20He','se_*\x0a*Eg:\x20','HCBUx','sendMessag','menu\x20For\x20M','AUPUb','video','\x0a\x0a*_Type\x20','yz/pickupl','date\x20ALive','.jpg','n\x20Support:','nk:\x20','yYpZV','i.popcat.x','reply','54MbkMKb','https://ap','match','&quote','alive','text','nexWr','υ*\x0a*_To\x20Up','qDcnq','fJkEN','quote','.gif','42740560XuKqdW','t\x20Created\x20','FExnw','tools','image','By\x20MAHER\x20Z','OEVeA','3586524LSxFxj','get','hOgod','lastIndexO','DQxZd','.jpeg','updateOne','\x20By\x20','lp_*\x0a*_Joi','i/qotd','vqs.com/ap','nghdj','OoTAV','.mov','findOne','i-Device\x20W','*ι\x20αм\x20σηℓι','_I\x20am\x20Mult','ot\x20is\x20Onli','265sKaPZn','log','UBAIR_*\x0a*_','FqRbd','https://fa','\x20ι\x20нєℓρ\x20уσ','.avi','url','includes','startsWith','\x20list._*\x0a*','save','\x20Message\x20U','291612JmhBVS','hatsapp\x20Bo','_Alive_Mes','33102IqATnp','.png','ines','substring','author','length','chat','data','pickupline','replace','279tLokjF','&line','Unknown\x20li','alive\x20Your','To\x20check\x20B','body','ηє\x20нσω\x20¢αη','toLowerCas','9129624SdwkMo','41708KqgjHm'];_0x4a93=function(){return _0x39a013;};return _0x4a93();}
 //---------------------------------------------------------------------------
-/*
-Module_Exports({
-            kingcmd: "addnote",
-            kingclass: "owner",
-            infocmd: "Adds a note on db.",
-            kingpath: __filename
-        },
-        async(Void, citel, text,{ isCreator }) => {
-            if (!isCreator) return citel.reply(tlang().owner)
-            if (!text) return citel.reply(`🔍 *Please Provide Text To Save In Notes*`)
- 
- 
-
-
-        }
-    )
- */
-    //---------------------------------------------------------------------------
 Module_Exports({
         kingcmd: "notes",
         shortcut : ['note'],
@@ -342,72 +276,7 @@ let txt =
 })
 
     //---------------------------------------------------------------------------
-Module_Exports({
-            kingcmd: "alive",
-            kingclass: "tools",
-            kingpath: __filename,
-            infocmd: "To check Bot is Online"
-        },
-        async(sigma, citel, text, {isCreator}) => {
-          let get = text;
-          let alivemessage = `*ι αм σηℓιηє нσω ¢αη ι нєℓρ уσυ*\n*_To Update ALive Message Use_*\n*Eg: _${prefix}alive Your_Alive_Message_*`;
-          let urll = '';     
-          let image = false;
-          let video = false;
-          
-if(isCreator && text != "")
-{
-       let aliv = await alive.findOne({ id:"1" }) || await new alive({ id:"1"}).save();
-       if (text.startsWith("get")) return citel.reply(aliv.get);
-       const linkPattern = /(https?:\/\/\S+)/gi;
-       const imageExtensions = ['.jpg', '.jpeg', '.png'];
-       const videoExtensions = ['.mp4', '.avi', '.mov', '.mkv', '.gif'];
-       let match = text.match(linkPattern) || false ; 
-       if(match)
-       {
-            let i = 0;
-            while (i < match.length && !image && !video ) 
-            {
-                  urll = match[i];
-                  const extension = urll.substring(urll.lastIndexOf('.')).toLowerCase();
-                  if (imageExtensions.includes(extension)) { image = true;  video = false; } 
-                  else if (videoExtensions.includes(extension)) { video = true; image = false; }
-                  else { console.log(`Unknown link: ${urll}`)  }
-                  i++;
-             }
-       }
-       if( video || image) { text = text.replace(urll, ''); }
-       await alive.updateOne({ id: '1' }, { text: text, get : get, url: urll,  image: image,   video: video });
-}
-   let aliv = await alive.findOne({ id:"1" }) || await new alive({ id:"1"}).save() ;   
-   alivemessage = aliv.text;
-  if(alivemessage.includes('&quote')){
-     var quoo = await axios.get(`https://favqs.com/api/qotd`);
-     let quote = `${quoo.data.quote.body} By ${quoo.data.quote.author}`; 
-     alivemessage = alivemessage.replace('&quote', quote);
-  }
-   if(alivemessage.includes('&line'))
-   {
-       var resultt = await fetchJson(`https://api.popcat.xyz/pickuplines`);
-       var line = resultt.pickupline;
-       alivemessage = alivemessage.replace('&line', line);
-   }
-  
-         
-        
-          image = aliv.image || false;
-          video=aliv.video || false ;
-          urll = aliv.url || await botpic() ;
 
-          
-const alivtxt = `${alivemessage}\n\n*_Type ${prefix}menu For My Commands list._*\n*_I am Multi-Device Whatsapp Bot Created By MAHER ZUBAIR_*\n*_For Any Help_*\n*_Join Support:  ${sgc}_*`;
- const messageOptions = image ? { image: { url: urll }, caption: alivtxt }
-                        : video? { video: { url: urll },gifPlayback: true, caption: alivtxt }
-                        : { image: { url: await botpic() }, caption: alivtxt };
-
-  return sigma.sendMessage(citel.chat, messageOptions,{quoted : citel });
-        }
-    )
 
 
 // All These System Commands Are Developed By @Maher-Zubair
