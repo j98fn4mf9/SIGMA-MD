@@ -102,7 +102,7 @@ const headers = {
     .then(response => { if (response.ok) return citel.reply(`*_Auto Read_Messages is Disbaled SuccessFully_*`);  })
     .catch(error => {   return citel.reply("```Please, Give me Valid Variable Name```") });  
 } else {
-  const status = Config.readmessage ? 'Enabled' : 'Disabled';
+  const status = Config.readmessage === "false" ? 'Enabled' : 'Disabled';
     return await citel.send(`*_Auto Read_Messages is Currently ${status}_*\n
 *_#1  ➪  ${prefix}read on_*
 *_#2  ➪  ${prefix}read off_*
