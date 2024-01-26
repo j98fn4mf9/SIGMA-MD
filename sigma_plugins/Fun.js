@@ -18,7 +18,7 @@
 
 const { dare, truth, random_question ,name } = require('../lib/truth-dare.js')
 const axios = require('axios')
-const { Module_Exports,sleep } = require('../lib')
+const { Module_Exports,sleep,Function } = require('../lib')
 const fetch = require('node-fetch');
     //---------------------------------------------------------------------------
 Module_Exports({
