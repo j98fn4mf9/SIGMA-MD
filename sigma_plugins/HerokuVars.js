@@ -44,7 +44,7 @@ const headers = {
 'Authorization': `Bearer ${authToken}`,
 'Content-Type': 'application/json'
 };
-const varName = 'AUTO_STATUS_SAVER';
+const varName = 'AUTO_STATUS_VIEW';
 const newVarValue = 'true'; 
 //if (!newVarValue) return citel.reply (`Please give me Value After ':' \n*_Ex : ${prefix}setvar AUTO_READ_STATUS:true_*`);       
 fetch(`https://api.heroku.com/apps/${appName}/config-vars`, {
