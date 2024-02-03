@@ -29,21 +29,23 @@ const fetch = require('node-fetch');
 if(Config.HEROKU_APP_NAME && Config.HEROKU_API_KEY ){
 
 //=============================================================================================================================
+//=============================================================================================================================
 Function({
   kingcmd: "prefix",
   infocmd: "set bot prefix",
   kingclass: "whatsapp",
 },
 async(Void, citel , text, { isCreator }) => {
-  if (!text) return citel.sent('give me prefix')
+  if (!text) return citel.sent(`cuurent prefix is ${Config.HANDLERS}`)
   if (!isCreator) return citel.sent(tlang().owner);
 
   const newPrefix = text.trim();
 
-  const validPrefixRegex = /^[^\s]+$/;
+  // Add a list of allowed prefixes
+  const allowedPrefixes = ['.', ',', '/', "'",'null','-'];
 
-  if (!validPrefixRegex.test(newPrefix)) {
-    return citel.reply("```Please provide a valid prefix (without spaces)```");
+  if (!allowedPrefixes.includes(newPrefix)) {
+    return citel.reply("```Please provide a valid prefix```");
   }
 
   const headers = {
@@ -86,6 +88,8 @@ async(Void, citel , text, { isCreator }) => {
   }
 }
 )
+
+//=============================================================================================================================
 
 //=============================================================================================================================
 
