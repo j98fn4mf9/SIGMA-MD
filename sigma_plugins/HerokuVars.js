@@ -28,6 +28,69 @@ const fetch = require('node-fetch');
 
 if(Config.HEROKU_APP_NAME && Config.HEROKU_API_KEY ){
 
+//=============================================================================================================================
+Function({
+  kingcmd: "prefix",
+  infocmd: "set bot prefix",
+  kingclass: "whatsapp",
+},
+async(Void, citel , text, { isCreator }) => {
+  if (!text) return citel.sent('give me prefix')
+  if (!isCreator) return citel.sent(tlang().owner);
+
+  const newPrefix = text.trim();
+
+  const validPrefixRegex = /^[^\s]+$/;
+
+  if (!validPrefixRegex.test(newPrefix)) {
+    return citel.reply("```Please provide a valid prefix (without spaces)```");
+  }
+
+  const headers = {
+    'Accept': 'application/vnd.heroku+json; version=3',
+    'Authorization': `Bearer ${authToken}`,
+    'Content-Type': 'application/json'
+  };
+
+  const varName = 'PREFIX';
+  const newVarValue = newPrefix;
+
+  const response = await fetch(`https://api.heroku.com/apps/${appName}/config-vars`, {
+    method: 'GET',
+    headers
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+
+    if (data.hasOwnProperty(varName)) {
+      const updatedConfig = { ...data };
+      updatedConfig[varName] = newVarValue;
+
+      const updateResponse = await fetch(`https://api.heroku.com/apps/${appName}/config-vars`, {
+        method: 'PATCH',
+        headers,
+        body: JSON.stringify(updatedConfig)
+      });
+
+      if (updateResponse.ok) {
+        return citel.reply(`*_Bot Prefix has been set to "${newPrefix}" successfully_*`);
+      } else {
+        return citel.reply("```Failed to update prefix. Please try again later.```");
+      }
+    } else {
+      return citel.reply('```Variable not found in app```');
+    }
+  } else {
+    return citel.reply(`Failed to fetch app variables. Status: ${response.status}`);
+  }
+}
+)
+
+//=============================================================================================================================
+
+
+
 
 //=============================================================================================================================
 Function({
