@@ -28,7 +28,92 @@ const fetch = require('node-fetch');
 
 if(Config.HEROKU_APP_NAME && Config.HEROKU_API_KEY ){
 
+
+//=============================================================================================================================
+Function({
+  kingcmd: "stsview",
+  shortcut:["sview","statusview"],
+  infocmd: "to Maker Bot Auto Save Your Statuses",
+  kingclass: "whatsapp",
+},
+async(Void, citel , text,{ isCreator }) => {
+ if (!isCreator) return citel.sent(tlang().owner);
+if (text.split(" ")[0] == "on" || text.split(" ")[0] == "enable") {
+const headers = {
+'Accept': 'application/vnd.heroku+json; version=3',
+'Authorization': `Bearer ${authToken}`,
+'Content-Type': 'application/json'
+};
+const varName = 'AUTO_STATUS_SAVER';
+const newVarValue = 'true'; 
+//if (!newVarValue) return citel.reply (`Please give me Value After ':' \n*_Ex : ${prefix}setvar AUTO_READ_STATUS:true_*`);       
+fetch(`https://api.heroku.com/apps/${appName}/config-vars`, {
+method: 'GET',
+headers 
+}) 
+.then(response => {
+      if (response.ok) { return response.json(); } 
+      else { throw new Error(`Failed to fetch app variables. Status: ${response.status}`); }
+})
+.then(data => {
+  if (data.hasOwnProperty(varName)) 
+  {
+          const updatedConfig = { ...data };
+          updatedConfig[varName] = newVarValue;
+          return fetch(`https://api.heroku.com/apps/${appName}/config-vars`, 
+                  {
+                  method: 'PATCH',
+                  headers,
+                  body: JSON.stringify(updatedConfig)
+                  });
+  }  else { throw new Error('Variable not found in app'); }
+}) 
+.then(response => { if (response.ok) return citel.reply(`*_Auto Status_View is Enabled SuccessFully_*`);  })
+.catch(error => {   return citel.reply("```Please, Give me Valid Variable Name```") });
+} else if (text.split(" ")[0] === "off" || text.split(" ")[0] === "disable") {
+const headers = {
+  'Accept': 'application/vnd.heroku+json; version=3',
+  'Authorization': `Bearer ${authToken}`,
+  'Content-Type': 'application/json'
+};
+const varName = 'AUTO_STATUS_VIEW';
+const newVarValue = 'false';      
+fetch(`https://api.heroku.com/apps/${appName}/config-vars`, {
+  method: 'GET',
+  headers 
+}) 
+  .then(response => {
+            if (response.ok) { return response.json(); } 
+            else { throw new Error(`Failed to fetch app variables. Status: ${response.status}`); }
+  })
+  .then(data => {
+        if (data.hasOwnProperty(varName)) 
+        {
+                const updatedConfig = { ...data };
+                updatedConfig[varName] = newVarValue;
+                return fetch(`https://api.heroku.com/apps/${appName}/config-vars`, 
+                        {
+                        method: 'PATCH',
+                        headers,
+                        body: JSON.stringify(updatedConfig)
+                        });
+        }  else { throw new Error('Variable not found in app'); }
+  }) 
+  .then(response => { if (response.ok) return citel.reply(`*_Auto Status_View is Disbaled SuccessFully_*`);  })
+  .catch(error => {   return citel.reply("```Please, Give me Valid Variable Name```") });  
+} else {
+const status = Config.status_view === "false" ? 'Disabled' : 'Enabled';
+  return await citel.send(`*_Auto Status_View is Currently ${status}_*\n
+*_#1  ➪  ${prefix}stsview on_*
+*_#2  ➪  ${prefix}stsview off_*
+`);
+} 
   
+}
+)
+
+
+//=============================================================================================================================
 
 //=============================================================================================================================
 Function({
