@@ -29,7 +29,7 @@ module.exports = {
   botname: process.env.BOT_NAME || 'sɪɢᴍᴀ ᴹᴰ',  // add the botname you want
   ownername:  process.env.OWNER_NAME || `ᴍᴀʜᴇʀ ᴢᴜʙᴀɪʀ`, // add your name
   author:  process.env.PACK_AUTHER || 'ᴍᴀʜᴇʀ ᴢᴜʙᴀɪʀ', 
-  status_view : process.env.AUTO_STATUS_VIEW || 'false', // if it true it automatically views status
+  status_view : process.env.AUTO_STATUS_VIEW || 'true', // if it true it automatically views status
   status_saver : process.env.AUTO_STATUS_SAVER || 'false', // if it true it automatically Downloads status and send in your inbx
   packname:  process.env.PACK_NAME || "sɪɢᴍᴀ ᴹᴰ" , 
   autoreaction: process.env.AUTO_REACTION || 'true', // if it true it will react to all messages

@@ -42,7 +42,7 @@ async(Void, citel , text, { isCreator }) => {
   const newPrefix = text.trim();
 
   // Add a list of allowed prefixes
-  const allowedPrefixes = ['.', ',', '/', "'",'null','-'];
+  const allowedPrefixes = ['.', ',', '/', "'",'null','-','?',';',':','!','@','#','%','^'];
 
   if (!allowedPrefixes.includes(newPrefix)) {
     return citel.reply("```Please provide a valid prefix```");
