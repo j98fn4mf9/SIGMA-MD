@@ -49,10 +49,6 @@ fetch(`https://api.heroku.com/apps/${appName}/config-vars`, {
   headers,
   body: JSON.stringify({ [varName]: newVarValue })
 }) 
-.then(response => {
-      if (response.ok) { return response.json(); } 
-      else { throw new Error(`Failed to fetch app variables. Status: ${response.status}`); }
-})
 .then(response => { if (response.ok) return citel.reply(`*_Level Up Message is Enabled SuccessFully_*`);  })
 .catch(error => {   return citel.reply("```Please, Give me Valid Variable Name```") });
 } else if (text.split(" ")[0] === "off" || text.split(" ")[0] === "disable") {
@@ -68,10 +64,6 @@ fetch(`https://api.heroku.com/apps/${appName}/config-vars`, {
   headers,
   body: JSON.stringify({ [varName]: newVarValue })
 }) 
-  .then(response => {
-            if (response.ok) { return response.json(); } 
-            else { throw new Error(`Failed to fetch app variables. Status: ${response.status}`); }
-  })
   .then(response => { if (response.ok) return citel.reply(`*_Level Up Message is Disbaled SuccessFully_*`);  })
   .catch(error => {   return citel.reply("```Please, Give me Valid Variable Name```") });  
 } else {
