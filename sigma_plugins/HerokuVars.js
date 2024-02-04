@@ -31,22 +31,40 @@ if(Config.HEROKU_APP_NAME && Config.HEROKU_API_KEY ){
 //=============================================================================================================================
 Function({
   kingcmd: "stheme",
-  infocmd: "set bot prefix",
+  infocmd: "set bot theme",
   kingclass: "general",
 },
 async(Void, citel , text, { isCreator }) => {
   if (!isCreator) return citel.sent(tlang().owner);
-  if (!text) return citel.sent(`*_Provide Me New Theme To Update. Ex: ${prefix}Theme GOJO_*`)
+  if (!text) return citel.sent(`*_Provide Me New Theme To Update. Ex: ${prefix}Theme GOJO_*\n\n*_All Themes Lists_*
+_SHELBY_
+_JOKER_
+_PATRICK_
+_GOJO_
+_SIGMA_MD_
+_AVENGERS_
+_BTS_
+_ANIME_
+_MOMOLAND_
+_ADAM_
+_AYANOKOJI_
+_EDITH_
+_FRIDAY_
+_GENOS_
+_GIDEON_
+_GOKU_
+_LUFFY_
+_NARUTO_
+_NEZUKO_
+_PARKER_`)
 
   const newtheme = text.trim();
 
-  // Add a list of allowed prefixes
-  const alltheme = ['GOJO','SHELBY','JOKER','PATRICK','SIGMA_MD','AVENGERS'];
+  const alltheme = ['GOJO','SHELBY','JOKER','PATRICK','SIGMA_MD','AVENGERS','BTS','ANIME','MOMOLAND','ADAM','AYANOKOJI','EDITH','FRIDAY','GENOS','GIDEON','GOKU','LUFFY','NARUTO','NEZUKO','PARKER','MZ'];
 
   if (!alltheme.includes(newtheme)) {
     return citel.reply(`*_Please Provide A Valid Theme_*`);
   }
-
   const headers = {
     'Accept': 'application/vnd.heroku+json; version=3',
     'Authorization': `Bearer ${authToken}`,
@@ -62,21 +80,13 @@ async(Void, citel , text, { isCreator }) => {
       body: JSON.stringify({ [varName]: newVarValue })
   });
 
-  if (response.ok) {
-    const data = await response.json();
-
-      if (updateResponse.ok) {
+      if (response.ok) {
         return citel.reply(`*_Bot Theme SuccessFully Updated To 『 ${newtheme} 』_*`);
       } else {
         return citel.reply("```Failed to update Bot Theme```");
       }
-
-  } else {
-    return citel.reply(`Failed to fetch app variables. Status: ${response.status}`);
-  }
 }
 )
-
 //=============================================================================================================================
 Function({
   kingcmd: "setprefix",
