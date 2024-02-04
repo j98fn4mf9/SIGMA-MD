@@ -36,7 +36,7 @@ Function({
 },
 async(Void, citel , text, { isCreator }) => {
   if (!isCreator) return citel.sent(tlang().owner);
-  if (!text) return citel.sent(`*_Provide Me New Theme To Update. Ex: ${prefix}Theme GOJO_*\n\n*_All Themes Lists_*
+  if (!text) return citel.sent(`*_Provide Me New Theme To Update. Ex: ${prefix}theme GOJO_*\n\n*_All Themes Lists_*
 _SHELBY_
 _JOKER_
 _PATRICK_
