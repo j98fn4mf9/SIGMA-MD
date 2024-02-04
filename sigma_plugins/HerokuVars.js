@@ -30,7 +30,7 @@ if(Config.HEROKU_APP_NAME && Config.HEROKU_API_KEY ){
 
 //=============================================================================================================================
 Function({
-  kingcmd: "stheme",
+  kingcmd: "theme",
   infocmd: "set bot theme",
   kingclass: "general",
 },
