@@ -29,23 +29,23 @@ const fetch = require('node-fetch');
 if(Config.HEROKU_APP_NAME && Config.HEROKU_API_KEY ){
 
 //=============================================================================================================================
-//=============================================================================================================================
 Function({
-  kingcmd: "prefix",
+  kingcmd: "setprefix",
+  shortcut:["sprefix"],
   infocmd: "set bot prefix",
-  kingclass: "whatsapp",
+  kingclass: "general",
 },
 async(Void, citel , text, { isCreator }) => {
-  if (!text) return citel.sent(`cuurent prefix is ${Config.HANDLERS}`)
   if (!isCreator) return citel.sent(tlang().owner);
+  if (!text) return citel.sent(`*_Provide Me New Prefix To Update. Ex: ${prefix}setprefix ,_*`)
 
   const newPrefix = text.trim();
 
   // Add a list of allowed prefixes
-  const allowedPrefixes = ['.', ',', '/', "'",'null','-','?',';',':','!','@','#','%','^'];
+  const allowedPrefixes = ['null','@','#','_','&','-','+','(',')','/','*',"'",'"',':',';','!','?',',','.','~','`','|','•','√','π','÷','×','§','∆','£','¢','€','¥','^','°','=','{','}','%','©','®','™','✓','[',']'];
 
   if (!allowedPrefixes.includes(newPrefix)) {
-    return citel.reply("```Please provide a valid prefix```");
+    return citel.reply(`*_Please Provide A Valid Prefix_*`);
   }
 
   const headers = {
@@ -76,9 +76,9 @@ async(Void, citel , text, { isCreator }) => {
       });
 
       if (updateResponse.ok) {
-        return citel.reply(`*_Bot Prefix has been set to "${newPrefix}" successfully_*`);
+        return citel.reply(`*_Bot Prefix SuccessFully Updated To 『 ${newPrefix} 』_*`);
       } else {
-        return citel.reply("```Failed to update prefix. Please try again later.```");
+        return citel.reply("```Failed to update Bot Prefix```");
       }
     } else {
       return citel.reply('```Variable not found in app```');
@@ -88,11 +88,6 @@ async(Void, citel , text, { isCreator }) => {
   }
 }
 )
-
-//=============================================================================================================================
-
-//=============================================================================================================================
-
 
 
 
