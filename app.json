@@ -91,27 +91,12 @@
   "description": "Add Your Own Bot Name",
    "value": "sɪɢᴍᴀ ᴹᴰ"
     
-},
-"REMOVE_BG_KEY": {
-  "description": "Add The RemoveBg Api Key.Git New APi Key From remove.bg",
-   "value": "34wcCGPoe3yaGtpiBZgx4SN7",
-    "required": false
 }
 },
 
 "addons": [
   {
-    "plan": "heroku-postgresql:basic"
-  } 
-],
-"buildpacks": [
-  { "url": "https://github.com/heroku/heroku-buildpack-nodejs#latest" },
-  { "url": "https://github.com/carlosdommor/heroku-buildpack-ffmpeg-latest" }
-],
-"formation": {
-    "web": {
-        "quantity": 1,
-        "size": "standard-2x"
-    }
-}
+    "plan": "heroku-postgresql"
+  }
+]
 }
