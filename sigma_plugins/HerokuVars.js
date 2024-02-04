@@ -31,6 +31,7 @@ if(Config.HEROKU_APP_NAME && Config.HEROKU_API_KEY ){
 //=============================================================================================================================
 Function({
   kingcmd: "levelup",
+  shortcut:["lvlup"],
   infocmd: "sends a level up message when someone's level up",
   kingclass: "misc",
 },
@@ -98,10 +99,6 @@ fetch(`https://api.heroku.com/apps/${appName}/config-vars`, {
   headers,
   body: JSON.stringify({ [varName]: newVarValue })
 }) 
-.then(response => {
-      if (response.ok) { return response.json(); } 
-      else { throw new Error(`Failed to fetch app variables. Status: ${response.status}`); }
-})
 .then(response => { if (response.ok) return citel.reply(`*_Auto Reaction is Enabled SuccessFully_*`);  })
 .catch(error => {   return citel.reply("```Please, Give me Valid Variable Name```") });
 } else if (text.split(" ")[0] === "off" || text.split(" ")[0] === "disable") {
@@ -117,10 +114,6 @@ fetch(`https://api.heroku.com/apps/${appName}/config-vars`, {
   headers,
   body: JSON.stringify({ [varName]: newVarValue })
 }) 
-  .then(response => {
-            if (response.ok) { return response.json(); } 
-            else { throw new Error(`Failed to fetch app variables. Status: ${response.status}`); }
-  })
   .then(response => { if (response.ok) return citel.reply(`*_Auto Reaction is Disbaled SuccessFully_*`);  })
   .catch(error => {   return citel.reply("```Please, Give me Valid Variable Name```") });  
 } else if (text.split(" ")[0] === "all") {
@@ -136,10 +129,6 @@ fetch(`https://api.heroku.com/apps/${appName}/config-vars`, {
       headers,
       body: JSON.stringify({ [varName]: newVarValue })
     }) 
-      .then(response => {
-                if (response.ok) { return response.json(); } 
-                else { throw new Error(`Failed to fetch app variables. Status: ${response.status}`); }
-      })
       .then(response => { if (response.ok) return citel.reply(`*_Auto Reaction is Set On All Messages_*`);  })
       .catch(error => {   return citel.reply("```Please, Give me Valid Variable Name```") }); 
 } else {
