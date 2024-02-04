@@ -33,30 +33,10 @@
        "value": "Fuck,porn,sex,xxx,fucker,asshole,fuck you,fuck off",
        "required" :false
       },
-  "LEVEL_UP_MESSAGE": {
-    "description": "Fill the value false if you don't want bot send Level up message in chat.",
-     "required" :false,
-     "value": "true"
-    },
-"AUTO_STATUS_VIEW": {
-    "description": "Fill the value true if you  want bot view your Statuses",
-     "required" :false,
-     "value": "false"
-    },
-    "AUTO_STATUS_SAVER": {
-      "description": "Fill the value true if you  want bot Download your Statuses. and send them in your inbox",
-       "required" :false,
-       "value": "false"
-      },
 "MSGS_IN_LOG": {
     "description": "Fill the value true if you want to see Messages in Console.",
      "required" :false,
      "value": "false"
-    },
-      "READ_MESSAGE": {
-    "description": "Fill the value false if you not want bot to read all messages.",
-     "required" :false,
-     "value": "true"
     },
    "DISABLE_PM": {
     "description": "Disable bot in pm, Take it false if you wanna run bot in your pm",
@@ -86,11 +66,6 @@
     "WORKTYPE": {
   "description": "Worktype of your bot. Use public or private, if it is private then only bot number can use it. If public then everyone can use it.",
          "value": "public"
-  },
-      "AUTO_REACTION": {
-    "description": " Set it `true` If You Wants To Reacts emoji to all commands. \n And Set it `all` is You Wants to React Emojies to All Messages",
-     "value": "true",
-     "required": false 
   },
   "PACK_NAME": {
     "description": "Put Sticker Pack_Name.",
@@ -125,9 +100,18 @@
 },
 
 "addons": [
-		{
-			"plan": "heroku-postgresql"
-		}
-	]
- 
+  {
+    "plan": "heroku-postgresql:basic"
+  } 
+],
+"buildpacks": [
+  { "url": "https://github.com/heroku/heroku-buildpack-nodejs#latest" },
+  { "url": "https://github.com/carlosdommor/heroku-buildpack-ffmpeg-latest" }
+],
+"formation": {
+    "web": {
+        "quantity": 1,
+        "size": "standard-2x"
+    }
+}
 }
