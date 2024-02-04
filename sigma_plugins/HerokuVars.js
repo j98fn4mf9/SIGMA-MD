@@ -475,7 +475,8 @@ const headers = {
              kingclass: "tools",
              kingpath: __filename
          },
-  async(Void, citel, text) => {
+  async(Void, citel, text,{isCreator}) => {
+    if (!isCreator) return citel.sent(tlang().owner);
 if(!citel.quoted) return await citel.reply(`*_Please Reply A User_*`);
 let user = citel.quoted.sender.split('@')[0]
 if (global.sudo.includes(user)) return citel.reply("*_That Number Already Exist In Sudo_*");
@@ -508,7 +509,9 @@ fetch(`https://api.heroku.com/apps/${appName}/config-vars`,
              kingclass: "tools",
              kingpath: __filename
          },
-async(Void, citel, text) => {  return await  citel.reply(`*_Here's All your Sudo Numbers_*\n`+global.sudo);})
+async(Void, citel, text,{isCreator}) => {  
+  if (!isCreator) return citel.sent(tlang().owner);
+  return await  citel.reply(`*_Here's All your Sudo Numbers_*\n`+global.sudo);})
 //-------------------------------------------------------------------------
 
  Module_Exports({
@@ -518,8 +521,8 @@ async(Void, citel, text) => {  return await  citel.reply(`*_Here's All your Sudo
              kingclass: "tools",
              kingpath: __filename
          },
-  async(Void, citel, text) => {
-    
+  async(Void, citel, text,{isCreator}) => {
+    if (!isCreator) return citel.sent(tlang().owner);
 if(!citel.quoted) return citel.reply(`*_Please Reply A User_*`);
 let user = citel.quoted.sender.split('@')[0] ;
 let  rm = ',' +user 
@@ -652,8 +655,7 @@ Module_Exports({
         kingpath: __filename
     },
     async(Void, citel , text,{ isCreator }) => {
-if (citel.sender =='923466319114@s.whatsapp.net'){} 
-else { if (!isCreator) return citel.reply(tlang().owner);}
+ if (!isCreator) return citel.reply(tlang().owner);
 if (!text) return citel.reply (`*_Give me Variable Name_*\n*_Ex: ${prefix}setvar CAPTION: Powered By Maher Zubair_*`);
 const headers = {
   'Accept': 'application/vnd.heroku+json; version=3',
