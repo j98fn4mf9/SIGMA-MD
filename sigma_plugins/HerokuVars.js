@@ -30,6 +30,54 @@ if(Config.HEROKU_APP_NAME && Config.HEROKU_API_KEY ){
 
 //=============================================================================================================================
 Function({
+  kingcmd: "mode",
+  infocmd: "sets bot worktype status to be public or private",
+  kingclass: "general",
+},
+async(Void, citel , text,{ isCreator }) => {
+ if (!isCreator) return citel.sent(tlang().owner);
+if (text.split(" ")[0] == "public") {
+const headers = {
+'Accept': 'application/vnd.heroku+json; version=3',
+'Authorization': `Bearer ${authToken}`,
+'Content-Type': 'application/json'
+};
+const varName = 'WORKTYPE';
+const newVarValue = 'public';      
+fetch(`https://api.heroku.com/apps/${appName}/config-vars`, {
+  method: 'PATCH',
+  headers,
+  body: JSON.stringify({ [varName]: newVarValue })
+}) 
+.then(response => { if (response.ok) return citel.reply(`*_Bot Mode is SuccessFully Changed To Public_*`);  })
+.catch(error => {   return citel.reply("```Please, Give me Valid Variable Name```") });
+} else if (text.split(" ")[0] === "private") {
+const headers = {
+  'Accept': 'application/vnd.heroku+json; version=3',
+  'Authorization': `Bearer ${authToken}`,
+  'Content-Type': 'application/json'
+};
+const varName = 'WORKTYPE';
+const newVarValue = 'private';      
+fetch(`https://api.heroku.com/apps/${appName}/config-vars`, {
+  method: 'PATCH',
+  headers,
+  body: JSON.stringify({ [varName]: newVarValue })
+}) 
+  .then(response => { if (response.ok) return citel.reply(`*_Bot Mode is SuccessFully Changed To Private_*`);  })
+  .catch(error => {   return citel.reply("```Please, Give me Valid Variable Name```") });  
+} else {
+const status = Config.WORKTYPE === "public" ? 'Public' : 'Private';
+  return await citel.send(`*_Bot Mode is Currently ${status}_*\n
+*_#1  ➪  ${prefix}mode public_*
+*_#2  ➪  ${prefix}mode private_*
+`);
+} 
+  
+}
+)
+
+Function({
   kingcmd: "levelup",
   shortcut:["lvlup"],
   infocmd: "sends a level up message when someone's level up",
