@@ -30,6 +30,82 @@ if(Config.HEROKU_APP_NAME && Config.HEROKU_API_KEY ){
 
 //=============================================================================================================================
 Function({
+  kingcmd: "reaction",
+  infocmd: "to Make Bot Auto react on your messages",
+  kingclass: "general",
+},
+async(Void, citel , text,{ isCreator }) => {
+ if (!isCreator) return citel.sent(tlang().owner);
+if (text.split(" ")[0] == "on" || text.split(" ")[0] == "enable") {
+const headers = {
+'Accept': 'application/vnd.heroku+json; version=3',
+'Authorization': `Bearer ${authToken}`,
+'Content-Type': 'application/json'
+};
+const varName = 'AUTO_REACTION';
+const newVarValue = 'true';      
+fetch(`https://api.heroku.com/apps/${appName}/config-vars`, {
+  method: 'PATCH',
+  headers,
+  body: JSON.stringify({ [varName]: newVarValue })
+}) 
+.then(response => {
+      if (response.ok) { return response.json(); } 
+      else { throw new Error(`Failed to fetch app variables. Status: ${response.status}`); }
+})
+.then(response => { if (response.ok) return citel.reply(`*_Auto Reaction is Enabled SuccessFully_*`);  })
+.catch(error => {   return citel.reply("```Please, Give me Valid Variable Name```") });
+} else if (text.split(" ")[0] === "off" || text.split(" ")[0] === "disable") {
+const headers = {
+  'Accept': 'application/vnd.heroku+json; version=3',
+  'Authorization': `Bearer ${authToken}`,
+  'Content-Type': 'application/json'
+};
+const varName = 'AUTO_REACTION';
+const newVarValue = 'false';      
+fetch(`https://api.heroku.com/apps/${appName}/config-vars`, {
+  method: 'PATCH',
+  headers,
+  body: JSON.stringify({ [varName]: newVarValue })
+}) 
+  .then(response => {
+            if (response.ok) { return response.json(); } 
+            else { throw new Error(`Failed to fetch app variables. Status: ${response.status}`); }
+  })
+  .then(response => { if (response.ok) return citel.reply(`*_Auto Reaction is Disbaled SuccessFully_*`);  })
+  .catch(error => {   return citel.reply("```Please, Give me Valid Variable Name```") });  
+} else if (text.split(" ")[0] === "all") {
+  const headers = {
+      'Accept': 'application/vnd.heroku+json; version=3',
+      'Authorization': `Bearer ${authToken}`,
+      'Content-Type': 'application/json'
+    };
+    const varName = 'AUTO_REACTION';
+    const newVarValue = 'all';      
+    fetch(`https://api.heroku.com/apps/${appName}/config-vars`, {
+      method: 'PATCH',
+      headers,
+      body: JSON.stringify({ [varName]: newVarValue })
+    }) 
+      .then(response => {
+                if (response.ok) { return response.json(); } 
+                else { throw new Error(`Failed to fetch app variables. Status: ${response.status}`); }
+      })
+      .then(response => { if (response.ok) return citel.reply(`*_Auto Reaction is Set On All Messages_*`);  })
+      .catch(error => {   return citel.reply("```Please, Give me Valid Variable Name```") }); 
+} else {
+const status = Config.autoreaction === "false" ? 'Disabled' : 'Enabled';
+  return await citel.send(`*_Auto Reaction is Currently ${status}_*\n
+*_#1  ➪  ${prefix}reaction on_*
+*_#2  ➪  ${prefix}reaction all_*
+*_#3  ➪  ${prefix}reaction off_*
+`);
+} 
+  
+}
+)
+//=============================================================================================================================
+Function({
   kingcmd: "theme",
   infocmd: "set bot theme",
   kingclass: "general",
