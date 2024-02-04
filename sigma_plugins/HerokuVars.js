@@ -30,6 +30,55 @@ if(Config.HEROKU_APP_NAME && Config.HEROKU_API_KEY ){
 
 //=============================================================================================================================
 Function({
+  kingcmd: "stheme",
+  infocmd: "set bot prefix",
+  kingclass: "general",
+},
+async(Void, citel , text, { isCreator }) => {
+  if (!isCreator) return citel.sent(tlang().owner);
+  if (!text) return citel.sent(`*_Provide Me New Theme To Update. Ex: ${prefix}Theme GOJO_*`)
+
+  const newtheme = text.trim();
+
+  // Add a list of allowed prefixes
+  const alltheme = ['GOJO','SHELBY','JOKER','PATRICK','SIGMA_MD','AVENGERS'];
+
+  if (!alltheme.includes(newtheme)) {
+    return citel.reply(`*_Please Provide A Valid Theme_*`);
+  }
+
+  const headers = {
+    'Accept': 'application/vnd.heroku+json; version=3',
+    'Authorization': `Bearer ${authToken}`,
+    'Content-Type': 'application/json'
+  };
+
+  const varName = 'THEME';
+  const newVarValue = newtheme;
+
+  const response = await fetch(`https://api.heroku.com/apps/${appName}/config-vars`, {
+      method: 'PATCH',
+      headers,
+      body: JSON.stringify({ [varName]: newVarValue })
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+
+      if (updateResponse.ok) {
+        return citel.reply(`*_Bot Theme SuccessFully Updated To 『 ${newtheme} 』_*`);
+      } else {
+        return citel.reply("```Failed to update Bot Theme```");
+      }
+
+  } else {
+    return citel.reply(`Failed to fetch app variables. Status: ${response.status}`);
+  }
+}
+)
+
+//=============================================================================================================================
+Function({
   kingcmd: "setprefix",
   shortcut:["sprefix"],
   infocmd: "set bot prefix",
@@ -88,8 +137,6 @@ async(Void, citel , text, { isCreator }) => {
   }
 }
 )
-
-
 
 //=============================================================================================================================
 Function({
@@ -173,9 +220,6 @@ const status = Config.status_view === "false" ? 'Disabled' : 'Enabled';
   
 }
 )
-
-
-//=============================================================================================================================
 
 //=============================================================================================================================
 Function({
