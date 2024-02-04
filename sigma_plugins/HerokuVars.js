@@ -34,8 +34,8 @@ Function({
   infocmd: "sets bot worktype status to be public or private",
   kingclass: "general",
 },
-async(Void, citel , text,{ isCreator }) => {
- if (!isCreator) return citel.sent(tlang().owner);
+async(con, m , text,{ isCreator }) => {
+ if (!isCreator) return m.sent(tlang().owner);
 if (text.split(" ")[0] == "public") {
 const headers = {
 'Accept': 'application/vnd.heroku+json; version=3',
@@ -49,8 +49,8 @@ fetch(`https://api.heroku.com/apps/${appName}/config-vars`, {
   headers,
   body: JSON.stringify({ [varName]: newVarValue })
 }) 
-.then(response => { if (response.ok) return citel.reply(`*_Bot Mode is SuccessFully Changed To Public_*`);  })
-.catch(error => {   return citel.reply("```Please, Give me Valid Variable Name```") });
+.then(response => { if (response.ok) return m.sent(`*_Bot Mode is SuccessFully Changed To Public_*`);  })
+.catch(error => {   return m.sent("```Please, Give me Valid Variable Name```") });
 } else if (text.split(" ")[0] === "private") {
 const headers = {
   'Accept': 'application/vnd.heroku+json; version=3',
@@ -64,11 +64,11 @@ fetch(`https://api.heroku.com/apps/${appName}/config-vars`, {
   headers,
   body: JSON.stringify({ [varName]: newVarValue })
 }) 
-  .then(response => { if (response.ok) return citel.reply(`*_Bot Mode is SuccessFully Changed To Private_*`);  })
-  .catch(error => {   return citel.reply("```Please, Give me Valid Variable Name```") });  
+  .then(response => { if (response.ok) return m.sent(`*_Bot Mode is SuccessFully Changed To Private_*`);  })
+  .catch(error => {   return m.sent("```Please, Give me Valid Variable Name```") });  
 } else {
 const status = Config.WORKTYPE === "public" ? 'Public' : 'Private';
-  return await citel.send(`*_Bot Mode is Currently ${status}_*\n
+  return await m.send(`*_Bot Mode is Currently ${status}_*\n
 *_#1  ➪  ${prefix}mode public_*
 *_#2  ➪  ${prefix}mode private_*
 `);
@@ -83,8 +83,8 @@ Function({
   infocmd: "sends a level up message when someone's level up",
   kingclass: "misc",
 },
-async(Void, citel , text,{ isCreator }) => {
- if (!isCreator) return citel.sent(tlang().owner);
+async(con, m , text,{ isCreator }) => {
+ if (!isCreator) return m.sent(tlang().owner);
 if (text.split(" ")[0] == "on" || text.split(" ")[0] == "enable") {
 const headers = {
 'Accept': 'application/vnd.heroku+json; version=3',
@@ -98,8 +98,8 @@ fetch(`https://api.heroku.com/apps/${appName}/config-vars`, {
   headers,
   body: JSON.stringify({ [varName]: newVarValue })
 }) 
-.then(response => { if (response.ok) return citel.reply(`*_Level Up Message is Enabled SuccessFully_*`);  })
-.catch(error => {   return citel.reply("```Please, Give me Valid Variable Name```") });
+.then(response => { if (response.ok) return m.sent(`*_Level Up Message is Enabled SuccessFully_*`);  })
+.catch(error => {   return m.sent("```Please, Give me Valid Variable Name```") });
 } else if (text.split(" ")[0] === "off" || text.split(" ")[0] === "disable") {
 const headers = {
   'Accept': 'application/vnd.heroku+json; version=3',
@@ -113,11 +113,11 @@ fetch(`https://api.heroku.com/apps/${appName}/config-vars`, {
   headers,
   body: JSON.stringify({ [varName]: newVarValue })
 }) 
-  .then(response => { if (response.ok) return citel.reply(`*_Level Up Message is Disbaled SuccessFully_*`);  })
-  .catch(error => {   return citel.reply("```Please, Give me Valid Variable Name```") });  
+  .then(response => { if (response.ok) return m.sent(`*_Level Up Message is Disbaled SuccessFully_*`);  })
+  .catch(error => {   return m.sent("```Please, Give me Valid Variable Name```") });  
 } else {
 const status = Config.levelupmessage === "false" ? 'Disabled' : 'Enabled';
-  return await citel.send(`*_Level Up Message is Currently ${status}_*\n
+  return await m.send(`*_Level Up Message is Currently ${status}_*\n
 *_#1  ➪  ${prefix}levelup on_*
 *_#2  ➪  ${prefix}levelup off_*
 `);
@@ -132,8 +132,8 @@ Function({
   infocmd: "to Make Bot Auto react on your messages",
   kingclass: "general",
 },
-async(Void, citel , text,{ isCreator }) => {
- if (!isCreator) return citel.sent(tlang().owner);
+async(con, m , text,{ isCreator }) => {
+ if (!isCreator) return m.sent(tlang().owner);
 if (text.split(" ")[0] == "on" || text.split(" ")[0] == "enable") {
 const headers = {
 'Accept': 'application/vnd.heroku+json; version=3',
@@ -147,8 +147,8 @@ fetch(`https://api.heroku.com/apps/${appName}/config-vars`, {
   headers,
   body: JSON.stringify({ [varName]: newVarValue })
 }) 
-.then(response => { if (response.ok) return citel.reply(`*_Auto Reaction is Enabled SuccessFully_*`);  })
-.catch(error => {   return citel.reply("```Please, Give me Valid Variable Name```") });
+.then(response => { if (response.ok) return m.sent(`*_Auto Reaction is Enabled SuccessFully_*`);  })
+.catch(error => {   return m.sent("```Please, Give me Valid Variable Name```") });
 } else if (text.split(" ")[0] === "off" || text.split(" ")[0] === "disable") {
 const headers = {
   'Accept': 'application/vnd.heroku+json; version=3',
@@ -162,8 +162,8 @@ fetch(`https://api.heroku.com/apps/${appName}/config-vars`, {
   headers,
   body: JSON.stringify({ [varName]: newVarValue })
 }) 
-  .then(response => { if (response.ok) return citel.reply(`*_Auto Reaction is Disbaled SuccessFully_*`);  })
-  .catch(error => {   return citel.reply("```Please, Give me Valid Variable Name```") });  
+  .then(response => { if (response.ok) return m.sent(`*_Auto Reaction is Disbaled SuccessFully_*`);  })
+  .catch(error => {   return m.sent("```Please, Give me Valid Variable Name```") });  
 } else if (text.split(" ")[0] === "all") {
   const headers = {
       'Accept': 'application/vnd.heroku+json; version=3',
@@ -177,11 +177,11 @@ fetch(`https://api.heroku.com/apps/${appName}/config-vars`, {
       headers,
       body: JSON.stringify({ [varName]: newVarValue })
     }) 
-      .then(response => { if (response.ok) return citel.reply(`*_Auto Reaction is Set On All Messages_*`);  })
-      .catch(error => {   return citel.reply("```Please, Give me Valid Variable Name```") }); 
+      .then(response => { if (response.ok) return m.sent(`*_Auto Reaction is Set On All Messages_*`);  })
+      .catch(error => {   return m.sent("```Please, Give me Valid Variable Name```") }); 
 } else {
 const status = Config.autoreaction === "false" ? 'Disabled' : 'Enabled';
-  return await citel.send(`*_Auto Reaction is Currently ${status}_*\n
+  return await m.send(`*_Auto Reaction is Currently ${status}_*\n
 *_#1  ➪  ${prefix}reaction on_*
 *_#2  ➪  ${prefix}reaction all_*
 *_#3  ➪  ${prefix}reaction off_*
@@ -196,9 +196,9 @@ Function({
   infocmd: "set bot theme",
   kingclass: "general",
 },
-async(Void, citel , text, { isCreator }) => {
-  if (!isCreator) return citel.sent(tlang().owner);
-  if (!text) return citel.sent(`*_Provide Me New Theme To Update. Ex: ${prefix}theme GOJO_*\n\n*_All Themes Lists_*
+async(con, m , text, { isCreator }) => {
+  if (!isCreator) return m.sent(tlang().owner);
+  if (!text) return m.sent(`*_Provide Me New Theme To Update. Ex: ${prefix}theme GOJO_*\n\n*_All Themes Lists_*
 _SHELBY_
 _JOKER_
 _PATRICK_
@@ -225,7 +225,7 @@ _PARKER_`)
   const alltheme = ['GOJO','SHELBY','JOKER','PATRICK','SIGMA_MD','AVENGERS','BTS','ANIME','MOMOLAND','ADAM','AYANOKOJI','EDITH','FRIDAY','GENOS','GIDEON','GOKU','LUFFY','NARUTO','NEZUKO','PARKER','MZ'];
 
   if (!alltheme.includes(newtheme)) {
-    return citel.reply(`*_Please Provide A Valid Theme_*`);
+    return m.sent(`*_Please Provide A Valid Theme_*`);
   }
   const headers = {
     'Accept': 'application/vnd.heroku+json; version=3',
@@ -243,9 +243,9 @@ _PARKER_`)
   });
 
       if (response.ok) {
-        return citel.reply(`*_Bot Theme SuccessFully Updated To 『 ${newtheme} 』_*`);
+        return m.sent(`*_Bot Theme SuccessFully Updated To 『 ${newtheme} 』_*`);
       } else {
-        return citel.reply("```Failed to update Bot Theme```");
+        return m.sent("```Failed to update Bot Theme```");
       }
 }
 )
@@ -256,9 +256,9 @@ Function({
   infocmd: "set bot prefix",
   kingclass: "general",
 },
-async(Void, citel , text, { isCreator }) => {
-  if (!isCreator) return citel.sent(tlang().owner);
-  if (!text) return citel.sent(`*_Provide Me New Prefix To Update. Ex: ${prefix}setprefix ,_*`)
+async(con, m , text, { isCreator }) => {
+  if (!isCreator) return m.sent(tlang().owner);
+  if (!text) return m.sent(`*_Provide Me New Prefix To Update. Ex: ${prefix}setprefix ,_*`)
 
   const newPrefix = text.trim();
 
@@ -266,7 +266,7 @@ async(Void, citel , text, { isCreator }) => {
   const allowedPrefixes = ['null','@','#','_','&','-','+','(',')','/','*',"'",'"',':',';','!','?',',','.','~','`','|','•','√','π','÷','×','§','∆','£','¢','€','¥','^','°','=','{','}','%','©','®','™','✓','[',']'];
 
   if (!allowedPrefixes.includes(newPrefix)) {
-    return citel.reply(`*_Please Provide A Valid Prefix_*`);
+    return m.sent(`*_Please Provide A Valid Prefix_*`);
   }
 
   const headers = {
@@ -297,15 +297,15 @@ async(Void, citel , text, { isCreator }) => {
       });
 
       if (updateResponse.ok) {
-        return citel.reply(`*_Bot Prefix SuccessFully Updated To 『 ${newPrefix} 』_*`);
+        return m.sent(`*_Bot Prefix SuccessFully Updated To 『 ${newPrefix} 』_*`);
       } else {
-        return citel.reply("```Failed to update Bot Prefix```");
+        return m.sent("```Failed to update Bot Prefix```");
       }
     } else {
-      return citel.reply('```Variable not found in app```');
+      return m.sent('```Variable not found in app```');
     }
   } else {
-    return citel.reply(`Failed to fetch app variables. Status: ${response.status}`);
+    return m.sent(`Failed to fetch app variables. Status: ${response.status}`);
   }
 }
 )
@@ -317,8 +317,8 @@ Function({
   infocmd: "to Maker Bot Auto Save Your Statuses",
   kingclass: "whatsapp",
 },
-async(Void, citel , text,{ isCreator }) => {
- if (!isCreator) return citel.sent(tlang().owner);
+async(con, m , text,{ isCreator }) => {
+ if (!isCreator) return m.sent(tlang().owner);
 if (text.split(" ")[0] == "on" || text.split(" ")[0] == "enable") {
 const headers = {
 'Accept': 'application/vnd.heroku+json; version=3',
@@ -327,30 +327,14 @@ const headers = {
 };
 const varName = 'AUTO_STATUS_VIEW';
 const newVarValue = 'true'; 
-//if (!newVarValue) return citel.reply (`Please give me Value After ':' \n*_Ex : ${prefix}setvar AUTO_READ_STATUS:true_*`);       
+//if (!newVarValue) return m.sent (`Please give me Value After ':' \n*_Ex : ${prefix}setvar AUTO_READ_STATUS:true_*`);       
 fetch(`https://api.heroku.com/apps/${appName}/config-vars`, {
-method: 'GET',
-headers 
-}) 
-.then(response => {
-      if (response.ok) { return response.json(); } 
-      else { throw new Error(`Failed to fetch app variables. Status: ${response.status}`); }
-})
-.then(data => {
-  if (data.hasOwnProperty(varName)) 
-  {
-          const updatedConfig = { ...data };
-          updatedConfig[varName] = newVarValue;
-          return fetch(`https://api.heroku.com/apps/${appName}/config-vars`, 
-                  {
-                  method: 'PATCH',
-                  headers,
-                  body: JSON.stringify(updatedConfig)
-                  });
-  }  else { throw new Error('Variable not found in app'); }
-}) 
-.then(response => { if (response.ok) return citel.reply(`*_Auto Status_View is Enabled SuccessFully_*`);  })
-.catch(error => {   return citel.reply("```Please, Give me Valid Variable Name```") });
+  method: 'PATCH',
+  headers,
+  body: JSON.stringify({ [varName]: newVarValue })
+})  
+.then(response => { if (response.ok) return m.sent(`*_Auto Status_View is Enabled SuccessFully_*`);  })
+.catch(error => {   return m.sent("```Please, Give me Valid Variable Name```") });
 } else if (text.split(" ")[0] === "off" || text.split(" ")[0] === "disable") {
 const headers = {
   'Accept': 'application/vnd.heroku+json; version=3',
@@ -360,31 +344,15 @@ const headers = {
 const varName = 'AUTO_STATUS_VIEW';
 const newVarValue = 'false';      
 fetch(`https://api.heroku.com/apps/${appName}/config-vars`, {
-  method: 'GET',
-  headers 
+  method: 'PATCH',
+  headers,
+  body: JSON.stringify({ [varName]: newVarValue })
 }) 
-  .then(response => {
-            if (response.ok) { return response.json(); } 
-            else { throw new Error(`Failed to fetch app variables. Status: ${response.status}`); }
-  })
-  .then(data => {
-        if (data.hasOwnProperty(varName)) 
-        {
-                const updatedConfig = { ...data };
-                updatedConfig[varName] = newVarValue;
-                return fetch(`https://api.heroku.com/apps/${appName}/config-vars`, 
-                        {
-                        method: 'PATCH',
-                        headers,
-                        body: JSON.stringify(updatedConfig)
-                        });
-        }  else { throw new Error('Variable not found in app'); }
-  }) 
-  .then(response => { if (response.ok) return citel.reply(`*_Auto Status_View is Disbaled SuccessFully_*`);  })
-  .catch(error => {   return citel.reply("```Please, Give me Valid Variable Name```") });  
+  .then(response => { if (response.ok) return m.sent(`*_Auto Status_View is Disbaled SuccessFully_*`);  })
+  .catch(error => {   return m.sent("```Please, Give me Valid Variable Name```") });  
 } else {
 const status = Config.status_view === "false" ? 'Disabled' : 'Enabled';
-  return await citel.send(`*_Auto Status_View is Currently ${status}_*\n
+  return await m.send(`*_Auto Status_View is Currently ${status}_*\n
 *_#1  ➪  ${prefix}stsview on_*
 *_#2  ➪  ${prefix}stsview off_*
 `);
@@ -400,8 +368,8 @@ Function({
   infocmd: "to Maker Bot Auto Save Your Statuses",
   kingclass: "whatsapp",
 },
-async(Void, citel , text,{ isCreator }) => {
- if (!isCreator) return citel.sent(tlang().owner);
+async(con, m , text,{ isCreator }) => {
+ if (!isCreator) return m.sent(tlang().owner);
 if (text.split(" ")[0] == "on" || text.split(" ")[0] == "enable") {
 const headers = {
 'Accept': 'application/vnd.heroku+json; version=3',
@@ -410,30 +378,14 @@ const headers = {
 };
 const varName = 'AUTO_STATUS_SAVER';
 const newVarValue = 'true'; 
-//if (!newVarValue) return citel.reply (`Please give me Value After ':' \n*_Ex : ${prefix}setvar AUTO_READ_STATUS:true_*`);       
+//if (!newVarValue) return m.sent (`Please give me Value After ':' \n*_Ex : ${prefix}setvar AUTO_READ_STATUS:true_*`);       
 fetch(`https://api.heroku.com/apps/${appName}/config-vars`, {
-method: 'GET',
-headers 
-}) 
-.then(response => {
-      if (response.ok) { return response.json(); } 
-      else { throw new Error(`Failed to fetch app variables. Status: ${response.status}`); }
-})
-.then(data => {
-  if (data.hasOwnProperty(varName)) 
-  {
-          const updatedConfig = { ...data };
-          updatedConfig[varName] = newVarValue;
-          return fetch(`https://api.heroku.com/apps/${appName}/config-vars`, 
-                  {
-                  method: 'PATCH',
-                  headers,
-                  body: JSON.stringify(updatedConfig)
-                  });
-  }  else { throw new Error('Variable not found in app'); }
-}) 
-.then(response => { if (response.ok) return citel.reply(`*_Auto Status_Saver is Enabled SuccessFully_*`);  })
-.catch(error => {   return citel.reply("```Please, Give me Valid Variable Name```") });
+  method: 'PATCH',
+  headers,
+  body: JSON.stringify({ [varName]: newVarValue })
+})  
+.then(response => { if (response.ok) return m.sent(`*_Auto Status_Saver is Enabled SuccessFully_*`);  })
+.catch(error => {   return m.sent("```Please, Give me Valid Variable Name```") });
 } else if (text.split(" ")[0] === "off" || text.split(" ")[0] === "disable") {
 const headers = {
   'Accept': 'application/vnd.heroku+json; version=3',
@@ -443,31 +395,15 @@ const headers = {
 const varName = 'AUTO_STATUS_SAVER';
 const newVarValue = 'false';      
 fetch(`https://api.heroku.com/apps/${appName}/config-vars`, {
-  method: 'GET',
-  headers 
+  method: 'PATCH',
+  headers,
+  body: JSON.stringify({ [varName]: newVarValue })
 }) 
-  .then(response => {
-            if (response.ok) { return response.json(); } 
-            else { throw new Error(`Failed to fetch app variables. Status: ${response.status}`); }
-  })
-  .then(data => {
-        if (data.hasOwnProperty(varName)) 
-        {
-                const updatedConfig = { ...data };
-                updatedConfig[varName] = newVarValue;
-                return fetch(`https://api.heroku.com/apps/${appName}/config-vars`, 
-                        {
-                        method: 'PATCH',
-                        headers,
-                        body: JSON.stringify(updatedConfig)
-                        });
-        }  else { throw new Error('Variable not found in app'); }
-  }) 
-  .then(response => { if (response.ok) return citel.reply(`*_Auto Status_Saver is Disbaled SuccessFully_*`);  })
-  .catch(error => {   return citel.reply("```Please, Give me Valid Variable Name```") });  
+  .then(response => { if (response.ok) return m.sent(`*_Auto Status_Saver is Disbaled SuccessFully_*`);  })
+  .catch(error => {   return m.sent("```Please, Give me Valid Variable Name```") });  
 } else {
 const status = Config.status_saver === "false" ? 'Disabled' : 'Enabled';
-  return await citel.send(`*_Auto Status_Saver is Currently ${status}_*\n
+  return await m.send(`*_Auto Status_Saver is Currently ${status}_*\n
 *_#1  ➪  ${prefix}stssaver on_*
 *_#2  ➪  ${prefix}stssaver off_*
 `);
@@ -483,8 +419,8 @@ const status = Config.status_saver === "false" ? 'Disabled' : 'Enabled';
     infocmd: "to auto read whatsapp messages",
     kingclass: "whatsapp",
 },
-async(Void, citel , text,{ isCreator }) => {
-if (!isCreator) return citel.reply(tlang().owner);
+async(con, m , text,{ isCreator }) => {
+if (!isCreator) return m.sent(tlang().owner);
 if (text.split(" ")[0] == "on" || text.split(" ")[0] == "enable") {
 const headers = {
 'Accept': 'application/vnd.heroku+json; version=3',
@@ -493,30 +429,14 @@ const headers = {
 };
 const varName = 'READ_MESSAGE';
 const newVarValue = 'true'; 
-//if (!newVarValue) return citel.reply (`Please give me Value After ':' \n*_Ex : ${prefix}setvar AUTO_READ_STATUS:true_*`);       
+//if (!newVarValue) return m.sent (`Please give me Value After ':' \n*_Ex : ${prefix}setvar AUTO_READ_STATUS:true_*`);       
 fetch(`https://api.heroku.com/apps/${appName}/config-vars`, {
-method: 'GET',
-headers 
-}) 
-.then(response => {
-        if (response.ok) { return response.json(); } 
-        else { throw new Error(`Failed to fetch app variables. Status: ${response.status}`); }
-})
-.then(data => {
-    if (data.hasOwnProperty(varName)) 
-    {
-            const updatedConfig = { ...data };
-            updatedConfig[varName] = newVarValue;
-            return fetch(`https://api.heroku.com/apps/${appName}/config-vars`, 
-                    {
-                    method: 'PATCH',
-                    headers,
-                    body: JSON.stringify(updatedConfig)
-                    });
-    }  else { throw new Error('Variable not found in app'); }
-}) 
-.then(response => { if (response.ok) return citel.reply(`*_Auto Read_Messages is Enabled SuccessFully_*`);  })
-.catch(error => {   return citel.reply("```Please, Give me Valid Variable Name```") });
+  method: 'PATCH',
+  headers,
+  body: JSON.stringify({ [varName]: newVarValue })
+})  
+.then(response => { if (response.ok) return m.sent(`*_Auto Read_Messages is Enabled SuccessFully_*`);  })
+.catch(error => {   return m.sent("```Please, Give me Valid Variable Name```") });
 } else if (text.split(" ")[0] === "off" || text.split(" ")[0] === "disable") {
 const headers = {
     'Accept': 'application/vnd.heroku+json; version=3',
@@ -525,33 +445,17 @@ const headers = {
   };
   const varName = 'READ_MESSAGE';
   const newVarValue = 'false'; 
-  //if (!newVarValue) return citel.reply (`Please give me Value After ':' \n*_Ex : ${prefix}setvar AUTO_READ_STATUS:true_*`);       
+  //if (!newVarValue) return m.sent (`Please give me Value After ':' \n*_Ex : ${prefix}setvar AUTO_READ_STATUS:true_*`);       
   fetch(`https://api.heroku.com/apps/${appName}/config-vars`, {
-    method: 'GET',
-    headers 
+      method: 'PATCH',
+      headers,
+      body: JSON.stringify({ [varName]: newVarValue })
   }) 
-    .then(response => {
-              if (response.ok) { return response.json(); } 
-              else { throw new Error(`Failed to fetch app variables. Status: ${response.status}`); }
-    })
-    .then(data => {
-          if (data.hasOwnProperty(varName)) 
-          {
-                  const updatedConfig = { ...data };
-                  updatedConfig[varName] = newVarValue;
-                  return fetch(`https://api.heroku.com/apps/${appName}/config-vars`, 
-                          {
-                          method: 'PATCH',
-                          headers,
-                          body: JSON.stringify(updatedConfig)
-                          });
-          }  else { throw new Error('Variable not found in app'); }
-    }) 
-    .then(response => { if (response.ok) return citel.reply(`*_Auto Read_Messages is Disbaled SuccessFully_*`);  })
-    .catch(error => {   return citel.reply("```Please, Give me Valid Variable Name```") });  
+    .then(response => { if (response.ok) return m.sent(`*_Auto Read_Messages is Disbaled SuccessFully_*`);  })
+    .catch(error => {   return m.sent("```Please, Give me Valid Variable Name```") });  
 } else {
   const status = Config.readmessage === "false" ? 'Disabled' : 'Enabled';
-    return await citel.send(`*_Auto Read_Messages is Currently ${status}_*\n
+    return await m.send(`*_Auto Read_Messages is Currently ${status}_*\n
 *_#1  ➪  ${prefix}read on_*
 *_#2  ➪  ${prefix}read off_*
 `);
