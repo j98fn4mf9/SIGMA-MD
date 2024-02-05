@@ -19,17 +19,17 @@
  
 
 
-/**const axios = require('axios');
-const { tlang,cmd } = require('../lib')
+const axios = require('axios');
+const { tlang,Function } = require('../lib')
 const { redeploy , getvar , delvar , getallvar , change_env , get_deployments} = require('../lib/koyeb')
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-cmd(
+Function(
   {
-    pattern: "updatenow",
-    desc: "update bot with refreshed commit.",
-    filename: __filename,
-    category: "misc",
+    kingcmd: "updatenow",
+    infocmd: "update bot with refreshed commit.",
+    kingpath: __filename,
+    kingclass: "misc",
   },
   async (Void,citel,text,{isCreator}) => {
        if(!isCreator) return citel.reply(tlang().owner);
@@ -39,12 +39,12 @@ cmd(
        return citel.reply(data)
   })
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-cmd(
+Function(
   {
-    pattern: "koyebgetvar",
-    desc: "get desired var from koyeb.",
-    filename: __filename,
-    category: "misc",
+    kingcmd: "koyebgetvar",
+    infocmd: "get desired var from koyeb.",
+    kingpath: __filename,
+    kingclass: "misc",
   },
   async (Void,citel,text,{isCreator}) => {
        if(!isCreator) return citel.reply(tlang().owner);
@@ -53,12 +53,12 @@ cmd(
        return citel.reply(data)
   })
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-cmd(
+Function(
   {
-    pattern: "getallvar",
-    desc: "get all vars from koyeb.",
-    filename: __filename,
-    category: "misc",
+    kingcmd: "getallvar",
+    infocmd: "get all vars from koyeb.",
+    kingpath: __filename,
+    kingclass: "misc",
   },
   async (Void,citel,text,{isCreator}) => {
        if(!isCreator) return citel.reply(tlang().owner);
@@ -66,12 +66,12 @@ cmd(
        return citel.reply(data)
   })
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-cmd(
+Function(
   {
-    pattern: "koyebsetvar",
-    desc: "set var in koyeb.",
-    filename: __filename,
-    category: "misc",
+    kingcmd: "kvar",
+    infocmd: "set var in koyeb.",
+    kingpath: __filename,
+    kingclass: "misc",
   },
   async (Void,citel,text,{isCreator}) => {
        if(!isCreator) return citel.reply(tlang().owner);
@@ -83,12 +83,12 @@ cmd(
   })
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-cmd(
+Function(
   {
-    pattern: "koyebdelvar",
-    desc: "delete var from koyeb.",
-    filename: __filename,
-    category: "misc",
+    kingcmd: "koyebdelvar",
+    infocmd: "delete var from koyeb.",
+    kingpath: __filename,
+    kingclass: "misc",
   },
   async (Void,citel,text,{isCreator}) => {
        if(!isCreator) return citel.reply(tlang().owner);
@@ -98,4 +98,4 @@ cmd(
        let data = await delvar(text)
        return citel.reply(data)
   })
-**/
+
