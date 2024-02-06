@@ -4,7 +4,7 @@
     "description": "SIGMA-MD A Whatsapp Bot By Maher Zubair",
     "main": "lib/client.js",
     "type": "commonjs",
-    "engines" : { "node": "v18.16.0", "npm": "9.5.1" },
+    "engines" : { "node": "21.6.1", "npm": "10.2.4" },
     "license": "GPL-3.0",
     "scripts": { 
               "start": "pm2 start lib/client.js --deep-monitoring --attach --name SIGMA-MD",
