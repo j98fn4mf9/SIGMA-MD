@@ -1,8 +1,8 @@
-//══════════════════════════════════════════════════════════════════════════════════════════════════════// 
+//══════════════════════════════════════════════════════════════════════════════════════════════════════//
 //                                                                                                      //
 //                                   MULTI-DEVICE WHATSAPP BOT                                          //
 //                                                                                                      //
-//                                            𝚅.𝟷.𝟸.𝟽                                                   // 
+//                                         v：1．0．0                                                   // 
 //                                                                                                      //
 //              ███████╗██╗ ██████╗ ███╗   ███╗ █████╗     ███╗   ███╗██████╗                           //
 //              ██╔════╝██║██╔════╝ ████╗ ████║██╔══██╗    ████╗ ████║██╔══██╗                          //
@@ -57,149 +57,7 @@ Module_Exports({
   } else return citel.reply ("```Please, Reply To A Non Animated Sticker```")
         }
     )
-//---------------------------------------------------------------------------
-    
- Module_Exports({
-             kingcmd: "vv",
-             shortcut : ['viewonce','retrive'],
-             infocmd: "Send VV MEssage in current message",
-             kingclass: "converter",
-             use: '',
-             kingpath: __filename
-         },
-         async(sigma, citel, text) => {
-try {
-const quot = citel.msg.contextInfo.quotedMessage.viewOnceMessageV2;
-  if(quot)
-  {
-    if(quot.message.imageMessage) 
-    { console.log("Quot Entered") 
-       let cap =quot.message.imageMessage.caption;
-       let anu = await sigma.downloadAndSaveMediaMessage(quot.message.imageMessage)
-       return sigma.sendMessage(citel.chat,{image:{url : anu},caption : cap })
-    }
-    if(quot.message.videoMessage) 
-    {
-       let cap =quot.message.videoMessage.caption;
-       let anu = await sigma.downloadAndSaveMediaMessage(quot.message.videoMessage)
-       return sigma.sendMessage(citel.chat,{video:{url : anu},caption : cap })
-    }
-     
-  }
-  //else citel.reply("```This is Not A ViewOnce Message```") 
-           
-}  
-         
- catch(e) {  console.log("error" , e ) }     
 
-           
-if(!citel.quoted) return citel.reply("```Please Reply A ViewOnce Message```")           
-if(citel.quoted.mtype === "viewOnceMessage")
-{ console.log("ViewOnce Entered") 
-     if(citel.quoted.message.imageMessage )
-    { 
-      let cap =citel.quoted.message.imageMessage.caption;
-      let anu = await sigma.downloadAndSaveMediaMessage(citel.quoted.message.imageMessage)
-      sigma.sendMessage(citel.chat,{image:{url : anu},caption : cap })
-    }
-    else if(citel.quoted.message.videoMessage )
-    {
-      let cap =citel.quoted.message.videoMessage.caption;
-      let anu = await sigma.downloadAndSaveMediaMessage(citel.quoted.message.videoMessage)
-      sigma.sendMessage(citel.chat,{video:{url : anu},caption : cap })
-    }
- 
-}
-else return citel.reply("```This is Not A ViewOnce Message```")
- 
-})
- //---------------------------------------------------------------------------
- //---------------------------------------------------------------------------
-Module_Exports({
-            kingcmd: "attp",
-
-            infocmd: "Makes sticker of replied image/video.",
-            kingclass: "sticker",
-kingpath: __filename,
-            use: ''
-        },
-        async(sigma, citel, text) => {
-if(!text) return citel.reply("```Please, Give Me text```")
-let url = `https://raganork-api.onrender.com/api/attp?text=${text}&apikey=with_love_souravkl11`
-let media  = await getBuffer(url)
-
-                let sticker = new Sticker(media, {
-                    pack: name.packname, 
-                    author: name.author, 
-                    type: StickerTypes.FULL,
-                    categories: ["🤩", "🎉"], 
-                    id: "12345", 
-                    quality: 100,
-                    background: "transparent", 
-                });
-                const buffer = await sticker.toBuffer();
-                return sigma.sendMessage(citel.chat, {sticker: buffer}, {quoted: citel });
-
-        }
-    )
-    //---------------------------------------------------------------------------
-    Module_Exports(
-        {
-            kingcmd: "steal",
-            //shortcut: ["s"],
-            infocmd: "Makes sticker of replied image/video.",
-            kingclass: "sticker",
-            kingpath: __filename,
-            use: 'reply to any image/video'
-        },
-        async (sigma, citel, text) => {
-            let mime = citel.mtype;
-            let media;
-            let pack;
-            let author;
-    
-            if (text && text.includes(';')) {
-                // If text is provided and contains a semicolon, use it to set pack and author
-                [pack, author] = text.split(';');
-            } else if(!pack || !author) return await citel.sent(`*Please reply to a sticker. Example: ${prefix}steal Maher;Zubair*`); {
-                // Use default values if no text or no semicolon is provided
-                
-            } 
-    
-            if (mime === "imageMessage" || mime === "videoMessage") {
-                media = await citel.download();
-            } else if (citel.quoted) {
-                mime = citel.quoted.mtype;
-                if (mime === "imageMessage" || mime === "videoMessage" || mime === "stickerMessage") {
-                    media = await citel.quoted.download();
-                } else {
-                    return citel.reply("```Uhh, Please reply to any image, video, or sticker```");
-                }
-            } else {
-                return citel.reply("```Uhh, Please reply to any image, video, or sticker```");
-            }
-    
-            if (mime === "videoMessage") {
-                let caption = { packname: pack, author: author };
-                const { writeExifVid } = require("../lib/exif.js");
-                let buffer = await writeExifVid(media, caption);
-                return await sigma.sendMessage(citel.chat, { sticker: { url: buffer } });
-            }
-    
-            let sticker = new Sticker(media, {
-                pack: pack,
-                author: author,
-                type: StickerTypes.FULL,
-                categories: ["🤩", "🎉"],
-                id: "12345",
-                quality: 100,
-                background: "transparent",
-            });
-    
-            const buffer = await sticker.toBuffer();
-            return sigma.sendMessage(citel.chat, { sticker: buffer }, { quoted: citel });
-        }
-    );
  //---------------------------------------------------------------------------
 Module_Exports({
             kingcmd: "stiker",
@@ -248,6 +106,65 @@ if(mime =="videoMessage")
             
         }
     )
+//============================================================================
+Module_Exports(
+    {
+        kingcmd: "steal",
+        //shortcut: ["s"],
+        infocmd: "Makes sticker of replied image/video.",
+        kingclass: "sticker",
+        kingpath: __filename,
+        use: 'reply to any image/video'
+    },
+    async (sigma, citel, text) => {
+        let mime = citel.mtype;
+        let media;
+        let pack;
+        let author;
+
+        if (text && text.includes(';')) {
+            // If text is provided and contains a semicolon, use it to set pack and author
+            [pack, author] = text.split(';');
+        } else if(!pack || !author) return await citel.sent(`*Please reply to a sticker. Example: ${prefix}steal Maher;Zubair*`); {
+            // Use default values if no text or no semicolon is provided
+            
+        } 
+
+        if (mime === "imageMessage" || mime === "videoMessage") {
+            media = await citel.download();
+        } else if (citel.quoted) {
+            mime = citel.quoted.mtype;
+            if (mime === "imageMessage" || mime === "videoMessage" || mime === "stickerMessage") {
+                media = await citel.quoted.download();
+            } else {
+                return citel.reply("```Uhh, Please reply to any image, video, or sticker```");
+            }
+        } else {
+            return citel.reply("```Uhh, Please reply to any image, video, or sticker```");
+        }
+
+        if (mime === "videoMessage") {
+            let caption = { packname: pack, author: author };
+            const { writeExifVid } = require("../lib/exif.js");
+            let buffer = await writeExifVid(media, caption);
+            return await sigma.sendMessage(citel.chat, { sticker: { url: buffer } });
+        }
+
+        let sticker = new Sticker(media, {
+            pack: pack,
+            author: author,
+            type: StickerTypes.FULL,
+            categories: ["🤩", "🎉"],
+            id: "12345",
+            quality: 100,
+            background: "transparent",
+        });
+
+        const buffer = await sticker.toBuffer();
+        return sigma.sendMessage(citel.chat, { sticker: buffer }, { quoted: citel });
+    }
+);
+
  //---------------------------------------------------------------------------
 Module_Exports({
             kingcmd: "circle",
@@ -346,48 +263,47 @@ kingpath: __filename,
     )
 //---------------------------------------------------------------------------
 
-Module_Exports({
-            kingcmd: "memegen",
-            infocmd: "Write text on quoted image.",
-            kingclass: "sticker",
-            kingpath: __filename,
-            use: '',
-        },
-        async(sigma, citel, text) => {
-            if(!text && !citel.quoted) return await citel.reply("*Reply to Photo With text To Create Meme.*")
-            if (citel.quoted.mtype != 'imageMessage') return citel.reply(`*_Please, Reply to Photo Only._*`)
-
-          let textt = text.split('|')[0] || '' ;
-          let isCheck = text.split('|')[1] || 'sticker'; 
-          let tex1 =  textt.split(';')[0] || 'Suhail' ;    
-          let tex2 =  textt.split(';')[1] || '_' ;
-
-            let mee = await sigma.downloadAndSaveMediaMessage(citel.quoted)
-            let bg = await TelegraPh(mee)
-            let thmb =await getBuffer(`https://api.memegen.link/images/custom/${tex2}/${tex1}.png?background=${bg}`)
-
-          if (isCheck.startsWith('p') || isCheck.startsWith('P')) { await sigma.sendMessage(citel.chat , {image : thmb , caption : name.caption })  }
-          else
-          {
-            let sticker = new Sticker(thmb, {
-                    pack: name.packname, 
-                    author: name.author, 
-                    type: StickerTypes.FULL,
-                    categories: ["🤩", "🎉"], 
-                    id: "12345", 
-                    quality: 100,
-                    background: "transparent", 
-                });
-                const buffer = await sticker.toBuffer();
-                return sigma.sendMessage(citel.chat, {sticker: buffer}, {quoted: citel }); 
-          }
-          
-            return await fs.unlinkSync(mee)
-
-        }
-    )
-
  //---------------------------------------------------------------------------
+Module_Exports({
+        kingcmd: "meme",
+        infocmd: "Write text on quoted image.",
+        kingclass: "sticker",
+        kingpath: __filename,
+        use: '',
+    },
+    async(sigma, citel, text) => {
+        if(!text && !citel.quoted) return await citel.reply("*Reply to Photo orWith text To Create Meme.*")
+        if (citel.quoted.mtype != 'imageMessage') return citel.reply(`*_Please, Reply to PhotoOnly._*`)
+
+      let textt = text.split('|')[0] || '' ;
+      let isCheck = text.split('|')[1] || 'sticker'; 
+      let tex1 =  textt.split(';')[0] || 'Zubi' ;    
+      let tex2 =  textt.split(';')[1] || '_' ;
+
+        let mee = await sigma.downloadAndSaveMediaMessage(citel.quoted)
+        let bg = await TelegraPh(mee)
+        let thmb =await getBuffer(`https://api.memegen.link/images/custom/${tex1}/${tex2}.png?background=${bg}`)
+
+      if (isCheck.startsWith('p') || isCheck.startsWith('P')) { await sigma.sendMessage(citel.chat , {image : thmb , caption : name.caption })  }
+      else
+      {
+        let sticker = new Sticker(thmb, {
+                pack: name.packname, 
+                author: name.author, 
+                type: StickerTypes.FULL,
+                categories: ["🤩", "🎉"], 
+                id: "12345", 
+                quality: 100,
+                background: "transparent", 
+            });
+            const buffer = await sticker.toBuffer();
+            return sigma.sendMessage(citel.chat, {sticker: buffer}, {quoted: citel }); 
+      }
+
+        return await fs.unlinkSync(mee)
+
+    }
+)
  //---------------------------------------------------------------------------
 Module_Exports({
             kingcmd: "quotely",
@@ -443,30 +359,42 @@ Module_Exports({
         }
     )
     //---------------------------------------------------------------------------
-Module_Exports({
-            kingcmd: "fancy",
-            infocmd: "Makes stylish/fancy given text",
-            kingclass: "converter",
-            use: '56 SIGMA MD',
-            //react: "✅",
-            kingpath: __filename
-        },
-        async(sigma, citel, text) => {
-            if (isNaN(text.split(" ")[0]) || !text) {
-                let text = tiny(
-                    `*_fancy text generator_*\n★━━━━━━━━━━━━━━━━━━━━━★\n*example: ${prefix}fancy 32 _i am sigma male_*\n★━━━━━━━━━━━━━━━━━━━━━★\n\n`
-                );
-                listall("SIGMA MD").forEach((txt, num) => {
-                    text += `${(num += 1)} ${txt}\n`;
-                });
-                return await citel.reply(text);
-            }
-
-            let fancytextt = await fancytext(`${text.slice(2)}`, text.split(" ")[0])
-            citel.reply(fancytextt)
-
+Module_Exports(
+    {
+        kingcmd: "fancy",
+        infocmd: "Makes stylish/fancy given text",
+        kingclass: "converter",
+        use: '56 SIGMA MD',
+        //react: "✅",
+        kingpath: __filename
+    },
+    async(sigma, citel, text) => {
+      if (!text) return citel.reply(`*_Give Me Some Text, Ex: ${prefix}fancy sigma-md_*`)
+        if (!text) {
+            let helpText = tiny(
+                `*_fancy text generator_*\n★━━━━━━━━━━━━━━━━━━━━━★\n*example: ${prefix}fancy sigma _i am sigma male_*\n★━━━━━━━━━━━━━━━━━━━━━★\n\n`
+            );
+            listall(text).forEach((txt, num) => {
+                helpText += `${(num += 1)} ${txt}\n`;
+            });
+            return await citel.reply(helpText);
         }
-    )
+
+        if (isNaN(text.split(" ")[0])) {
+            let helpText = tiny(
+                `*_fancy text generator_*\n★━━━━━━━━━━━━━━━━━━━━━★\n*example: ${prefix}fancy 32 _i am sigma male_*\n★━━━━━━━━━━━━━━━━━━━━━★\n\n`
+            );
+            listall(text).forEach((txt, num) => {
+                helpText += `${(num += 1)} ${txt}\n`;
+            });
+            return await citel.reply(helpText);
+        }
+
+        let fancyText = await fancytext(text.slice(text.indexOf(" ") + 1), text.split(" ")[0]);
+        citel.reply(fancyText);
+    }
+);
+
     //---------------------------------------------------------------------------
 Module_Exports({
             kingcmd: "tiny",
@@ -489,8 +417,8 @@ Module_Exports({
     )
     //---------------------------------------------------------------------------
 Module_Exports({
-        kingcmd: "toaudio",
-        shortcut:['mp3','tomp3'],
+        kingcmd: "tomp3",
+        shortcut:['mp3','toaudio'],
         infocmd: "changes type to audio.",
         kingclass: "converter",
         use: 'reply to any Video',
@@ -519,7 +447,7 @@ if (mime =="audioMessage" || mime =="videoMessage")
 )
      //---------------------------------------------------------------------------
 Module_Exports({
-    kingcmd: "toMp4",
+    kingcmd: "tomp4",
     shortcut:['mp4','tovideo','tovid'],
     infocmd: "changes type to audio.",
     kingclass: "converter",
@@ -571,14 +499,43 @@ return citel.reply(`*Paste created on telegraph*\nName:${util.format(data.result
 
 
 Module_Exports({
+  kingcmd: "attp",
 
-    kingcmd: "attp1",
+  infocmd: "Makes sticker of replied image/video.",
+  kingclass: "sticker",
+kingpath: __filename,
+  use: ''
+},
+async(sigma, citel, text) => {
+if(!text) return citel.reply("```Please, Give Me text```")
+let url = `https://raganork-api.onrender.com/api/attp?text=${text}&apikey=with_love_souravkl11`
+let media  = await getBuffer(url)
 
-    infocmd: "Makes glowing sticker of text.",
+      let sticker = new Sticker(media, {
+          pack: name.packname, 
+          author: name.author, 
+          type: StickerTypes.FULL,
+          categories: ["🤩", "🎉"], 
+          id: "12345", 
+          quality: 100,
+          background: "transparent", 
+      });
+      const buffer = await sticker.toBuffer();
+      return sigma.sendMessage(citel.chat, {sticker: buffer}, {quoted: citel });
 
-    kingclass: "sticker",
+}
+)
 
-    kingpath: __filename,
+
+Module_Exports({
+
+  kingcmd: "attp1",
+
+  infocmd: "Makes glowing sticker of text.",
+
+  kingclass: "sticker",
+
+  kingpath: __filename,
 
 },
 
@@ -586,7 +543,7 @@ async(Void, citel, text) => {
 
 let a = await getBuffer(`https://api.erdwpe.com/api/maker/attp?text=${text}`)
 
-return citel.reply(a,{packname:'SIGMA_MD',author:'ZUBI'},"sticker") 
+return citel.reply(a,{packname:name.packname,author:name.author},"sticker") 
 
 }
 
@@ -596,13 +553,13 @@ return citel.reply(a,{packname:'SIGMA_MD',author:'ZUBI'},"sticker")
 
 Module_Exports({
 
-    kingcmd: "attp2",
+  kingcmd: "attp2",
 
-    infocmd: "Makes glowing sticker of text.",
+  infocmd: "Makes glowing sticker of text.",
 
-    kingclass: "sticker",
+  kingclass: "sticker",
 
-    kingpath: __filename,
+  kingpath: __filename,
 
 },
 
@@ -610,7 +567,7 @@ async(Void, citel, text) => {
 
 let a = await getBuffer(`https://api.lolhuman.xyz/api/attp?apikey=GataDios&text=${text}`)
 
-return citel.reply(a,{packname:'SIGMA_MD',author:'ZUBI'},"sticker") 
+return citel.reply(a,{packname:name.packname,author:name.author},"sticker") 
 
 }
 
@@ -620,13 +577,13 @@ return citel.reply(a,{packname:'SIGMA_MD',author:'ZUBI'},"sticker")
 
 Module_Exports({
 
-    kingcmd: "attp3",
+  kingcmd: "attp3",
 
-    infocmd: "Makes glowing sticker of text.",
+  infocmd: "Makes glowing sticker of text.",
 
-    kingclass: "sticker",
+  kingclass: "sticker",
 
-    kingpath: __filename,
+  kingpath: __filename,
 
 },
 
@@ -634,23 +591,22 @@ async(Void, citel, text) => {
 
 let a = await getBuffer(`https://api.lolhuman.xyz/api/attp2?apikey=GataDios&text=${text}`)
 
-return citel.reply(a,{packname:'SIGMA_MD',author:'ZUBI'},"sticker") 
+return citel.reply(a,{packname:name.packname,author:name.author},"sticker") 
 
 }
 
 )
 
 
-
 Module_Exports({
 
-    kingcmd: "ttp1",
+  kingcmd: "ttp1",
 
-    infocmd: "Makes glowing sticker of text.",
+  infocmd: "Makes glowing sticker of text.",
 
-    kingclass: "sticker",
+  kingclass: "sticker",
 
-    kingpath: __filename,
+  kingpath: __filename,
 
 },
 
@@ -658,7 +614,7 @@ async(Void, citel, text) => {
 
 let a = await getBuffer(`https://api.lolhuman.xyz/api/ttp?apikey=GataDios&text=${text}`)
 
-return citel.reply(a,{packname:'SIGMA_MD',author:'ZUBI'},"sticker") 
+return citel.reply(a,{packname:name.packname,author:name.author},"sticker") 
 
 }
 
@@ -668,13 +624,13 @@ return citel.reply(a,{packname:'SIGMA_MD',author:'ZUBI'},"sticker")
 
 Module_Exports({
 
-    kingcmd: "ttp2",
+  kingcmd: "ttp2",
 
-    infocmd: "Makes glowing sticker of text.",
+  infocmd: "Makes glowing sticker of text.",
 
-    kingclass: "sticker",
+  kingclass: "sticker",
 
-    kingpath: __filename,
+  kingpath: __filename,
 
 },
 
@@ -682,7 +638,7 @@ async(Void, citel, text) => {
 
 let a = await getBuffer(`https://api.lolhuman.xyz/api/ttp2?apikey=GataDios&text=${text}`)
 
-return citel.reply(a,{packname:'SIGMA_MD',author:'ZUBI'},"sticker") 
+return citel.reply(a,{packname:name.packname,author:name.author},"sticker") 
 
 }
 
@@ -692,13 +648,13 @@ return citel.reply(a,{packname:'SIGMA_MD',author:'ZUBI'},"sticker")
 
 Module_Exports({
 
-    kingcmd: "ttp3",
+  kingcmd: "ttp3",
 
-    infocmd: "Makes glowing sticker of text.",
+  infocmd: "Makes glowing sticker of text.",
 
-    kingclass: "sticker",
+  kingclass: "sticker",
 
-    kingpath: __filename,
+  kingpath: __filename,
 
 },
 
@@ -706,7 +662,7 @@ async(Void, citel, text) => {
 
 let a = await getBuffer(`https://api.lolhuman.xyz/api/ttp3?apikey=GataDios&text=${text}`)
 
-return citel.reply(a,{packname:'SIGMA_MD',author:'ZUBI'},"sticker") 
+return citel.reply(a,{packname:name.packname,author:name.author},"sticker") 
 
 }
 
@@ -716,13 +672,13 @@ return citel.reply(a,{packname:'SIGMA_MD',author:'ZUBI'},"sticker")
 
 Module_Exports({
 
-    kingcmd: "ttp4",
+  kingcmd: "ttp4",
 
-    infocmd: "Makes glowing sticker of text.",
+  infocmd: "Makes glowing sticker of text.",
 
-    kingclass: "sticker",
+  kingclass: "sticker",
 
-    kingpath: __filename,
+  kingpath: __filename,
 
 },
 
@@ -730,7 +686,7 @@ async(Void, citel, text) => {
 
 let a = await getBuffer(`https://api.lolhuman.xyz/api/ttp5?apikey=GataDios&text=${text}`)
 
-return citel.reply(a,{packname:'SIGMA_MD',author:'ZUBI'},"sticker") 
+return citel.reply(a,{packname:name.packname,author:name.author},"sticker") 
 
 }
 
@@ -740,13 +696,13 @@ return citel.reply(a,{packname:'SIGMA_MD',author:'ZUBI'},"sticker")
 
 Module_Exports({
 
-    kingcmd: "ttp5",
+  kingcmd: "ttp5",
 
-    infocmd: "Makes glowing sticker of text.",
+  infocmd: "Makes glowing sticker of text.",
 
-    kingclass: "sticker",
+  kingclass: "sticker",
 
-    kingpath: __filename,
+  kingpath: __filename,
 
 },
 
@@ -754,7 +710,7 @@ async(Void, citel, text) => {
 
 let a = await getBuffer(`https://api.lolhuman.xyz/api/ttp6?apikey=GataDios&text=${text}`)
 
-return citel.reply(a,{packname:'SIGMA_MD',author:'ZUBI'},"sticker") 
+return citel.reply(a,{packname:name.packname,author:name.author},"sticker") 
 
 }
 

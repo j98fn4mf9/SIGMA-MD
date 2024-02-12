@@ -139,103 +139,57 @@ return man.reply(replyf)
     }
 )
 //------------------------------------------------------------------------
-
-
-//---------------------------------------------------------------------------
-
 Module_Exports({
 
-            kingcmd: "hack",
+    kingcmd: "hack",
+    kingclass: "fun",
+    infocmd: "hacking prank",
+    kingpath: __filename,
 
-            kingclass: "fun",
+},
 
-            infocmd: "hacking prank",
-
-            use: ' ',
-
-            kingpath: __filename,
-
-        },
-
-        async(Void,citel, text) => {
-
-citel.reply("```Injecting malware```")
-
+async(Void,citel, text) => {
+const {key} = await Void.sendMessage(citel.chat,{text:"```Injecting malware```"},{quoted:citel})
 await sleep(1000)
-
-citel.reply("```Injecting malware \n 0%```")
-
+  await Void.sendMessage(citel.chat,{text:"```Injecting malware \n 0%```",edit:key},{quoted:citel})
 await sleep(1000)
-
-citel.reply("```Injecting malware \n █ 10%```")
-
+  await Void.sendMessage(citel.chat,{text:"```Injecting malware \n █ 10%```",edit:key},{quoted:citel})
 await sleep(1000)
-
-citel.reply("```Injecting malware \n █ █ 20%```")
-
+  await Void.sendMessage(citel.chat,{text:"```Injecting malware \n █ █ 20%```",edit:key},{quoted:citel})
 await sleep(1000)
-
-citel.reply("```Injecting malware \n █ █ █ 30%```")
-
+  await Void.sendMessage(citel.chat,{text:"```Injecting malware \n █ █ █ 30%```",edit:key},{quoted:citel})
 await sleep(1000)
-
-citel.reply("```Injecting malware \n █ █ █ █ 40%```")
-
+  await Void.sendMessage(citel.chat,{text:"```Injecting malware \n █ █ █ █ 40%```",edit:key},{quoted:citel})
 await sleep(1000)
-
-citel.reply("```Injecting malware \n █ █ █ █ █ 50%```")
-
+  await Void.sendMessage(citel.chat,{text:"```Injecting malware \n █ █ █ █ █ 50%```",edit:key},{quoted:citel})
 await sleep(1000)
-
-citel.reply("```Injecting malware \n █ █ █ █ █ █ 60%```")
-
+  await Void.sendMessage(citel.chat,{text:"```Injecting malware \n █ █ █ █ █ █ 60%```",edit:key},{quoted:citel})
 await sleep(1000)
-
-citel.reply("```Injecting malware \n █ █ █ █ █ █ █ 70%```")
-
+  await Void.sendMessage(citel.chat,{text:"```Injecting malware \n █ █ █ █ █ █ █ 70%```",edit:key},{quoted:citel})
 await sleep(1000)
-
-citel.reply("```Injecting malware \n █ █ █ █ █ █ █ █ 80%```")
-
+  await Void.sendMessage(citel.chat,{text:"```Injecting malware \n █ █ █ █ █ █ █ █ 80%```",edit:key},{quoted:citel})
 await sleep(1000)
-
-citel.reply("```Injecting malware \n █ █ █ █ █ █ █ █ █ 90%```")
-
+  await Void.sendMessage(citel.chat,{text:"```Injecting malware \n █ █ █ █ █ █ █ █ █ 90%```",edit:key},{quoted:citel})
 await sleep(1000)
-
-citel.reply("```Injecting malware \n █ █ █ █ █ █ █ █ █ █ 100%```")
-
+  await Void.sendMessage(citel.chat,{text:"```Injecting malware \n █ █ █ █ █ █ █ █ █ █ 100%```",edit:key},{quoted:citel})
 await sleep(1000)
-
-citel.reply("```System hyjacking on process.. \n Conecting to Server error to find 404 ```")
-
+  await Void.sendMessage(citel.chat,{text:"```System hijacking on process.. \n Connecting to Server error to find 404 ```",edit:key},{quoted:citel})
 await sleep(1000)
-
-citel.reply("```Divice successfully connected... \n Riciving data...```")
-
+  await Void.sendMessage(citel.chat,{text:"```Device successfully connected... \n Reciving data...```",edit:key},{quoted:citel})
 await sleep(1000)
-
-citel.reply("```Data hyjacked from divice 100% completed \n killing all evidence killing all malwares...```")
-
+  await Void.sendMessage(citel.chat,{text:"```Data hijacked from device 100% completed \n killing all evidence killing all malwares...```",edit:key},{quoted:citel})
 await sleep(1000)
-
-citel.reply("``` HACKING COMPLETED ```")
-
+  await Void.sendMessage(citel.chat,{text:"``` HACKING COMPLETED ```",edit:key},{quoted:citel})
 await sleep(1000)
-
-citel.reply("``` SENDING LOG DOCUMENTS...```")
-
+  await Void.sendMessage(citel.chat,{text:"``` SENDING LOG DOCUMENTS...```",edit:key},{quoted:citel})
 await sleep(1000)
-
-citel.reply("``` SUCCESSFULLY SENT DATA AND Connection disconnected```")
-
+  await Void.sendMessage(citel.chat,{text:"``` SUCCESSFULLY SENT DATA AND Connection disconnected```",edit:key},{quoted:citel})
 await sleep(1000)
+return  await Void.sendMessage(citel.chat,{text:"*BACKLOGS CLEARED*",edit:key},{quoted:citel})
 
-            return citel.reply('*BACKLOGS CLEARED*');
+}
 
-        }
-
-    )
+)
 
     Function({
         kingcmd: "teddy",

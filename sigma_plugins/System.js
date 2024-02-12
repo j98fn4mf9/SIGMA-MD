@@ -25,6 +25,7 @@ const axios = require('axios')
 const fetch = require('node-fetch');
     //---------------------------------------------------------------------------
 
+
     Function({
         kingcmd: "qr",
         kingclass: "owner",
@@ -33,7 +34,7 @@ const fetch = require('node-fetch');
     },
     async(con, m, text) => {
       const url = 'https://api.maher-zubair.tech/bot/qr';
-      //await m.sent(`*_Downloading Karina Whatsapp Please Wait_*`)
+      
       let res = await axios.get(url)
       let gb = res.data.Links.sigma_md
       const { key } = await con.sendMessage(m.chat, {
@@ -54,6 +55,7 @@ const fetch = require('node-fetch');
 
     }
 )
+     
 //--------------------------------------------------------------------------- 
 Module_Exports({
     kingcmd: "rmbg",
