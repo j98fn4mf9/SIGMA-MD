@@ -1,8 +1,8 @@
-//══════════════════════════════════════════════════════════════════════════════════════════════════════// 
+//══════════════════════════════════════════════════════════════════════════════════════════════════════//
 //                                                                                                      //
 //                                   MULTI-DEVICE WHATSAPP BOT                                          //
 //                                                                                                      //
-//                                            𝚅.𝟷.𝟸.𝟽                                                   // 
+//                                         v：1．0．0                                                   // 
 //                                                                                                      //
 //              ███████╗██╗ ██████╗ ███╗   ███╗ █████╗     ███╗   ███╗██████╗                           //
 //              ██╔════╝██║██╔════╝ ████╗ ████║██╔══██╗    ████╗ ████║██╔══██╗                          //
@@ -16,22 +16,15 @@
 //                                                                                                      //
 //══════════════════════════════════════════════════════════════════════════════════════════════════════//
 
-const { dare, truth, random_question ,name } = require('../lib/truth-dare.js')
+const { dare, truth, random_question ,name,tlang,prefix } = require('../lib/truth-dare.js')
 const axios = require('axios')
 const { Module_Exports,sleep,Function } = require('../lib')
 const fetch = require('node-fetch');
-    //---------------------------------------------------------------------------
-Module_Exports({
-            kingcmd: "question",
-            infocmd: "Random Question.",
-            kingclass: "fun",
-            kingpath: __filename,
-        },
-        async(Void, citel, text) => {
-            return await citel.reply(`${random_question()}`);
-        }
-    )
-    //---------------------------------------------------------------------------
+
+//Copy All These Commands Without AnyCopy Right Act
+//Must Give Credits And Star To My Repo
+
+
 Module_Exports({
             kingcmd: "truth",
             infocmd: "truth and dare(truth game.).",
@@ -44,7 +37,7 @@ Module_Exports({
     )
     //---------------------------------------------------------------------------
 Module_Exports({
-            kingcmd: "dirtydare",
+            kingcmd: "dare",
             infocmd: "truth and dare(dare game.).",
             kingclass: "game",
             kingpath: __filename,
@@ -86,6 +79,7 @@ Module_Exports({
   });
         }
     )
+
 
 //---------------------------------------------------------------------------
 Module_Exports({
@@ -141,85 +135,177 @@ return man.reply(replyf)
 //------------------------------------------------------------------------
 Module_Exports({
 
-    kingcmd: "hack",
-    kingclass: "fun",
-    infocmd: "hacking prank",
-    kingpath: __filename,
+            kingcmd: "hack",
+            kingclass: "fun",
+            infocmd: "hacking prank",
+            kingpath: __filename,
 
-},
+        },
 
-async(Void,citel, text) => {
+        async(Void,citel, text) => {
 const {key} = await Void.sendMessage(citel.chat,{text:"```Injecting malware```"},{quoted:citel})
 await sleep(1000)
-  await Void.sendMessage(citel.chat,{text:"```Injecting malware \n 0%```",edit:key},{quoted:citel})
+          await Void.sendMessage(citel.chat,{text:"```Injecting malware \n 0%```",edit:key},{quoted:citel})
 await sleep(1000)
-  await Void.sendMessage(citel.chat,{text:"```Injecting malware \n █ 10%```",edit:key},{quoted:citel})
+          await Void.sendMessage(citel.chat,{text:"```Injecting malware \n █ 10%```",edit:key},{quoted:citel})
 await sleep(1000)
-  await Void.sendMessage(citel.chat,{text:"```Injecting malware \n █ █ 20%```",edit:key},{quoted:citel})
+          await Void.sendMessage(citel.chat,{text:"```Injecting malware \n █ █ 20%```",edit:key},{quoted:citel})
 await sleep(1000)
-  await Void.sendMessage(citel.chat,{text:"```Injecting malware \n █ █ █ 30%```",edit:key},{quoted:citel})
+          await Void.sendMessage(citel.chat,{text:"```Injecting malware \n █ █ █ 30%```",edit:key},{quoted:citel})
 await sleep(1000)
-  await Void.sendMessage(citel.chat,{text:"```Injecting malware \n █ █ █ █ 40%```",edit:key},{quoted:citel})
+          await Void.sendMessage(citel.chat,{text:"```Injecting malware \n █ █ █ █ 40%```",edit:key},{quoted:citel})
 await sleep(1000)
-  await Void.sendMessage(citel.chat,{text:"```Injecting malware \n █ █ █ █ █ 50%```",edit:key},{quoted:citel})
+          await Void.sendMessage(citel.chat,{text:"```Injecting malware \n █ █ █ █ █ 50%```",edit:key},{quoted:citel})
 await sleep(1000)
-  await Void.sendMessage(citel.chat,{text:"```Injecting malware \n █ █ █ █ █ █ 60%```",edit:key},{quoted:citel})
+          await Void.sendMessage(citel.chat,{text:"```Injecting malware \n █ █ █ █ █ █ 60%```",edit:key},{quoted:citel})
 await sleep(1000)
-  await Void.sendMessage(citel.chat,{text:"```Injecting malware \n █ █ █ █ █ █ █ 70%```",edit:key},{quoted:citel})
+          await Void.sendMessage(citel.chat,{text:"```Injecting malware \n █ █ █ █ █ █ █ 70%```",edit:key},{quoted:citel})
 await sleep(1000)
-  await Void.sendMessage(citel.chat,{text:"```Injecting malware \n █ █ █ █ █ █ █ █ 80%```",edit:key},{quoted:citel})
+          await Void.sendMessage(citel.chat,{text:"```Injecting malware \n █ █ █ █ █ █ █ █ 80%```",edit:key},{quoted:citel})
 await sleep(1000)
-  await Void.sendMessage(citel.chat,{text:"```Injecting malware \n █ █ █ █ █ █ █ █ █ 90%```",edit:key},{quoted:citel})
+          await Void.sendMessage(citel.chat,{text:"```Injecting malware \n █ █ █ █ █ █ █ █ █ 90%```",edit:key},{quoted:citel})
 await sleep(1000)
-  await Void.sendMessage(citel.chat,{text:"```Injecting malware \n █ █ █ █ █ █ █ █ █ █ 100%```",edit:key},{quoted:citel})
+          await Void.sendMessage(citel.chat,{text:"```Injecting malware \n █ █ █ █ █ █ █ █ █ █ 100%```",edit:key},{quoted:citel})
 await sleep(1000)
-  await Void.sendMessage(citel.chat,{text:"```System hijacking on process.. \n Connecting to Server error to find 404 ```",edit:key},{quoted:citel})
+          await Void.sendMessage(citel.chat,{text:"```System hijacking on process.. \n Connecting to Server error to find 404 ```",edit:key},{quoted:citel})
 await sleep(1000)
-  await Void.sendMessage(citel.chat,{text:"```Device successfully connected... \n Reciving data...```",edit:key},{quoted:citel})
+          await Void.sendMessage(citel.chat,{text:"```Device successfully connected... \n Reciving data...```",edit:key},{quoted:citel})
 await sleep(1000)
-  await Void.sendMessage(citel.chat,{text:"```Data hijacked from device 100% completed \n killing all evidence killing all malwares...```",edit:key},{quoted:citel})
+          await Void.sendMessage(citel.chat,{text:"```Data hijacked from device 100% completed \n killing all evidence killing all malwares...```",edit:key},{quoted:citel})
 await sleep(1000)
-  await Void.sendMessage(citel.chat,{text:"``` HACKING COMPLETED ```",edit:key},{quoted:citel})
+          await Void.sendMessage(citel.chat,{text:"``` HACKING COMPLETED ```",edit:key},{quoted:citel})
 await sleep(1000)
-  await Void.sendMessage(citel.chat,{text:"``` SENDING LOG DOCUMENTS...```",edit:key},{quoted:citel})
+          await Void.sendMessage(citel.chat,{text:"``` SENDING LOG DOCUMENTS...```",edit:key},{quoted:citel})
 await sleep(1000)
-  await Void.sendMessage(citel.chat,{text:"``` SUCCESSFULLY SENT DATA AND Connection disconnected```",edit:key},{quoted:citel})
+          await Void.sendMessage(citel.chat,{text:"``` SUCCESSFULLY SENT DATA AND Connection disconnected```",edit:key},{quoted:citel})
 await sleep(1000)
-return  await Void.sendMessage(citel.chat,{text:"*BACKLOGS CLEARED*",edit:key},{quoted:citel})
+        return  await Void.sendMessage(citel.chat,{text:"*BACKLOGS CLEARED*",edit:key},{quoted:citel})
 
-}
+        }
 
+    )
+Function({
+    kingcmd: "teddy",
+    fromMe: true, 
+    infocmd: "send Teddy To Your Love",
+    kingclass: "fun"
+
+},
+async(sigma, man)=>{
+let emo =  ['❤', '💕', '😻', '🧡', '💛', '💚', '💙', '💜', '🖤', '❣', '💞', '💓', '💗', '💖', '💘', '💝', '💟', '♥', '❣️', '💖', '💘', '❤️', '💟', '🤍', '💓', '😍', '😘', '💚', '❤️'];
+const {key} = await man.reply("*_This IS FOr YOu_*")
+
+  for (const emoji of emo) {
+
+ await new Promise(res => setTimeout(res,1000));
+
+  let x = ""
+ let teddy = `
+*(\\_/)*
+*( •.•)*
+*/>*🤍`; 
+
+teddy = teddy.replace("🤍", emoji)
+  x = x + teddy;
+
+   await sigma.sendMessage(man.chat, {text: x, edit: key})
+  }
+})
+
+Function({
+  kingcmd:"lines",
+  kingclass:"fun",
+  infocmd:"get random lines"
+},async(con,m,text) => {
+  try {
+    let res = await fetch(`https://api.popcat.xyz/pickuplines`);
+    if (!res.ok) {
+      throw new Error(`_API request failed with status ${res.status}_`);
+    }
+    let json = await res.json();
+    let line = `_${json.pickupline}_`
+    let users = m.mentionedJid ? m.mentionedJid[0] : m.msg.contextInfo.participant || false;
+    if(users){
+    let cap = `_@${m.sender.split("@")[0]} Throwed *Lines* On @${users.split("@")[0]}_`;
+      con.sendMessage(m.chat, { text: line + `\n\n` + cap, mentions: [users, m.sender]}, { quoted: m });
+    } else {
+      let cap = `_@${m.sender.split("@")[0]} Throwed *Lines* At Everyone_`
+      con.sendMessage(m.chat, { text: line + `\n\n` + cap, mentions: [users, m.sender]}, { quoted: m });
+    }
+    }catch(e){ m.sent(`_${e}_`)
+    console.log(e)}
+  }
 )
 
-    Function({
-        kingcmd: "teddy",
-        fromMe: true, 
-        infocmd: "send Teddy To Yur Love",
-        kingclass: "fun"
-    
-    },
-    async(sigma, man)=>{
-    let emo =  ['❤', '💕', '😻', '🧡', '💛', '💚', '💙', '💜', '🖤', '❣', '💞', '💓', '💗', '💖', '💘', '💝', '💟', '♥', '❣️', '💖', '💘', '❤️', '💟', '🤍', '💓', '😍', '😘', '💚', '❤️'];
-    const {key} = await man.reply("*_This IS FOr YOu_*")
-    
-      for (const emoji of emo) {
-      
-     await new Promise(res => setTimeout(res,2000));
-     
-      let x = ""
-     let teddy = `
-    *(\\_/)*
-    *( •.•)*
-    */>*🤍`; 
-    
-    teddy = teddy.replace("🤍", emoji)
-      x = x + teddy;
-        
-       await sigma.sendMessage(man.chat, {text: x, edit: key})
-      }
+Function({
+  kingcmd:"flirt",
+  kingclsdd:"fun",
+  infocmd:"Flirt With Someone"
+},async(con,m,text) => {
+  try{
+      let shizokeys = 'shizo'	
+    let res = await fetch(`https://shizoapi.onrender.com/api/texts/flirt?apikey=${shizokeys}`)
+    if (!res.ok) throw await res.text()
+        let json = await res.json()
+   let sigma = `${json.result}`
+  let users = m.mentionedJid ? m.mentionedJid[0] : m.msg.contextInfo.participant || false;
+  if(users){
+  let cap = `_@${m.sender.split("@")[0]} *Flirted* With @${users.split("@")[0]}_`;
+    con.sendMessage(m.chat, { text: sigma + `\n\n` + cap, mentions: [users, m.sender]}, { quoted: m });
+  } else {
+    let cap = `_@${m.sender.split("@")[0]} *Flirted* With Everyone_`
+    con.sendMessage(m.chat, { text: sigma + `\n\n` + cap, mentions: [users, m.sender]}, { quoted: m });
+  }
+  }catch(e){m.sent(`_${e}_`)
+    console.log(e)}
 
-      
-    })
+  }
+)
+
+Function({
+  kingcmd:"poetry",
+  kingclsdd:"fun",
+  infocmd:"Get Random Poetry"
+},async(con,m,text) => {
+      let shizokeys = 'shizo'	
+  let res = await fetch(`https://shizoapi.onrender.com/api/texts/shayari?apikey=${shizokeys}`)
+    if (!res.ok) throw await res.text()
+        let json = await res.json()
+
+    let sigma = `_${json.result}_`
+    con.sendMessage(m.chat, { text: sigma, mentions: [m.sender] }, { quoted: m })
+  }
+)
+
+Function({
+  kingcmd: 'insult',
+  infocmd: 'insult someone',
+  category: "fun",
+},
+async (con, m) => {
+  try {
+    let response = await axios.get('https://evilinsult.com/generate_insult.php?lang=en&type=json');
+    let data = response.data;
+
+    if (!data || !data.insult) {
+      return m.reply('Unable To Insult');
+    }
+
+    let insult = data.insult;
+    let users = m.mentionedJid ? m.mentionedJid[0] : m.msg.contextInfo.participant || false;
+    if(users){
+    let cap = `_@${m.sender.split("@")[0]} *Insulted* @${users.split("@")[0]}_`;
+      con.sendMessage(m.chat, { text: cap + `\n\n` + `_${insult}_`, mentions: [users, m.sender]}, { quoted: m });
+    } else {
+      let cap = `_@${m.sender.split("@")[0]} *Insulted* Everyone_`
+      con.sendMessage(m.chat, { text: cap + `\n\n` + `_${insult}_`, mentions: [users, m.sender]}, { quoted: m });
+    }
+    }catch(e){ m.sent(`_${e}_`)
+    console.log(e)}
+});
+
+
+
 // These Fun Commands are Developed By @Maher-Zubair
 // Whatsapp +923466319114
 // Usage And CopyRights Are Reserved
