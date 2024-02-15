@@ -20,11 +20,10 @@ const { dare, truth, random_question ,name,tlang,prefix } = require('../lib/trut
 const axios = require('axios')
 const { Module_Exports,sleep,Function } = require('../lib')
 const fetch = require('node-fetch');
+    //---------------------------------------------------------------------------
+//--------------------------------------------------------------------------------
 
-//Copy All These Commands Without AnyCopy Right Act
-//Must Give Credits And Star To My Repo
-
-
+    //---------------------------------------------------------------------------
 Module_Exports({
             kingcmd: "truth",
             infocmd: "truth and dare(truth game.).",
@@ -239,7 +238,7 @@ Function({
 
 Function({
   kingcmd:"flirt",
-  kingclsdd:"fun",
+  kingclass:"fun",
   infocmd:"Flirt With Someone"
 },async(con,m,text) => {
   try{
@@ -264,7 +263,7 @@ Function({
 
 Function({
   kingcmd:"poetry",
-  kingclsdd:"fun",
+  kingclass:"fun",
   infocmd:"Get Random Poetry"
 },async(con,m,text) => {
       let shizokeys = 'shizo'	
@@ -280,7 +279,7 @@ Function({
 Function({
   kingcmd: 'insult',
   infocmd: 'insult someone',
-  category: "fun",
+  kingclass: "fun",
 },
 async (con, m) => {
   try {
