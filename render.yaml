@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: inrl-md
+    name: SIGMA-MD
     env: node
     branch: main
     repo: https://github.com/j98fn4mf9/SIGMA-MD.git
@@ -10,7 +10,7 @@ services:
     autoDeploy: false
     envVars:
       - key: SESSION_ID
-        sync: false
+        value: 07_02_2024_SIGMA_MD_uK1ki8vw_MAHER_ZUBAIR
       - key: BOT_INFO
         value: inrl;bot;https://i.imgur.com/VIpl3q5.mp4
       - key: WARN_COUNT
@@ -34,4 +34,4 @@ services:
       - key: SUDO
         value: 917025673121
       - key: DATABASE_URL
-        sync: false
+        value: mongodb+srv://mk:mk@new.vxtfxii.mongodb.net/?retryWrites=true&w=majority
