@@ -1,8 +1,8 @@
-//══════════════════════════════════════════════════════════════════════════════════════════════════════//
+//══════════════════════════════════════════════════════════════════════════════════════════════════════// 
 //                                                                                                      //
 //                                   MULTI-DEVICE WHATSAPP BOT                                          //
 //                                                                                                      //
-//                                         v：1．0．0                                                   // 
+//                                            𝚅.𝟷.4.9                                                   // 
 //                                                                                                      //
 //              ███████╗██╗ ██████╗ ███╗   ███╗ █████╗     ███╗   ███╗██████╗                           //
 //              ██╔════╝██║██╔════╝ ████╗ ████║██╔══██╗    ████╗ ████║██╔══██╗                          //
@@ -15,6 +15,22 @@
 //                                                                                                      //
 //                                                                                                      //
 //══════════════════════════════════════════════════════════════════════════════════════════════════════//
+
+/**
+
+* @project_name : SIGMA-MD
+* @Developer : Maher-Zubair
+* @Version : v.1.4.9
+* @license : Apache-2.0
+
+This Project Is Under Apache-2.0 License.
+So, No One Have Permission To Copy This Project,
+Reupload, Reversed Engineering And Any Kind Of Deobfuscation.
+Otherwise, A Legal Github Copyright Action Will Be Taken Against You
+Which Result In Removing The Copied Project And Permanantly Banning Of You Account.
+* @Copyright_owner : Maher-Zubair
+
+**/
 
 const axios = require('axios')
 const { sck1, tiny, fancytext,getBuffer, listall,Module_Exports , TelegraPh , name,prefix} = require('../lib')
@@ -354,7 +370,7 @@ Module_Exports({
             };
             let res = await axios.post("https://bot.lyo.su/quote/generate", body);
             let img = Buffer.alloc(res.data.result.image.length, res.data.result.image, "base64");
-            return citel.send(img,{packname:name.packname,author:'Maher Zubair'},"sticker")
+            return citel.send(img,{packname:name.packname,author:name.author},"sticker")
 
         }
     )
