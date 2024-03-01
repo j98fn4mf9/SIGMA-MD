@@ -1,3 +1,5 @@
+
+/*
 const { init_sudo, save_sudo } = require('../lib');
 
 const {Module_Exports} = require('../lib'); 
@@ -56,3 +58,5 @@ Module_Exports({
     async (Void, citel, text) => {
         return await citel.reply(`*_Here's All your Sudo Numbers_*\n` + global.sudo);
     });
+
+*/
