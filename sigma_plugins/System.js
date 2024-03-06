@@ -2,7 +2,7 @@
 //                                                                                                      //
 //                                   MULTI-DEVICE WHATSAPP BOT                                          //
 //                                                                                                      //
-//                                            𝚅.𝟷.4.9                                                   // 
+//                                            𝚅.𝟷.𝟻.𝟹                                                  // 
 //                                                                                                      //
 //              ███████╗██╗ ██████╗ ███╗   ███╗ █████╗     ███╗   ███╗██████╗                           //
 //              ██╔════╝██║██╔════╝ ████╗ ████║██╔══██╗    ████╗ ████║██╔══██╗                          //
@@ -20,14 +20,14 @@
 
 * @project_name : SIGMA-MD
 * @Developer : Maher-Zubair
-* @Version : v.1.4.9
+* @Version : v.1.5.3
 * @license : Apache-2.0
 
 This Project Is Under Apache-2.0 License.
 So, No One Have Permission To Copy This Project,
 Reupload, Reversed Engineering And Any Kind Of Deobfuscation.
 Otherwise, A Legal Github Copyright Action Will Be Taken Against You
-Which Result In Removing The Copied Project And Permanantly Banning Of You Account.
+Which Result In Removing The Copied Project And Permanantly Banning Of Your Account.
 * @Copyright_owner : Maher-Zubair
 
 **/
@@ -41,7 +41,6 @@ const axios = require('axios')
 const fetch = require('node-fetch');
     //---------------------------------------------------------------------------
 
-
     Function({
         kingcmd: "qr",
         kingclass: "owner",
@@ -49,10 +48,10 @@ const fetch = require('node-fetch');
         desc: "Sends SIGMA-MD Qr code to scan and get your session id."
     },
     async(con, m, text) => {
-      const url = 'https://api.maher-zubair.tech/bot/qr';
+      const url = `${maher_api}bot/qr`;
       
       let res = await axios.get(url)
-      let gb = res.data.Links.sigma_md
+      let gb = res.data.url.sigma_md
       const { key } = await con.sendMessage(m.chat, {
         image: { url: gb },
         caption: `*_Scan QR Within 15 Seconds_*\n\n${name.caption}`

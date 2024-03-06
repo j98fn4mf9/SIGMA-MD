@@ -1,3 +1,37 @@
+//══════════════════════════════════════════════════════════════════════════════════════════════════════// 
+//                                                                                                      //
+//                                   MULTI-DEVICE WHATSAPP BOT                                          //
+//                                                                                                      //
+//                                            𝚅.𝟷.𝟻.𝟹                                                  // 
+//                                                                                                      //
+//              ███████╗██╗ ██████╗ ███╗   ███╗ █████╗     ███╗   ███╗██████╗                           //
+//              ██╔════╝██║██╔════╝ ████╗ ████║██╔══██╗    ████╗ ████║██╔══██╗                          //
+//              ███████╗██║██║  ███╗██╔████╔██║███████║    ██╔████╔██║██║  ██║                          //
+//              ╚════██║██║██║   ██║██║╚██╔╝██║██╔══██║    ██║╚██╔╝██║██║  ██║                          //
+//              ███████║██║╚██████╔╝██║ ╚═╝ ██║██║  ██║    ██║ ╚═╝ ██║██████╔╝                          //
+//              ╚══════╝╚═╝ ╚═════╝ ╚═╝     ╚═╝╚═╝  ╚═╝    ╚═╝     ╚═╝╚═════╝                           //
+//                                                                                                      //
+//                                          BY:MAHER-ZUBAIR                                             //
+//                                                                                                      //
+//                                                                                                      //
+//══════════════════════════════════════════════════════════════════════════════════════════════════════//
+
+/**
+
+* @project_name : SIGMA-MD
+* @Developer : Maher-Zubair
+* @Version : v.1.5.3
+* @license : Apache-2.0
+
+This Project Is Under Apache-2.0 License.
+So, No One Have Permission To Copy This Project,
+Reupload, Reversed Engineering And Any Kind Of Deobfuscation.
+Otherwise, A Legal Github Copyright Action Will Be Taken Against You
+Which Result In Removing The Copied Project And Permanantly Banning Of Your Account.
+* @Copyright_owner : Maher-Zubair
+
+**/
+
 const fs = require('fs-extra')
 if (fs.existsSync('config.env')) require('dotenv').config({ path: __dirname+'/config.env' })
 
@@ -11,12 +45,15 @@ global.video = '' ;
 global.lol   = 'GataDios'
 global.cali  = `lykoUzNh`
 global.devs  = "923466319114";
-global.blockJids = process.env.BLOCK_JID ||'120363169665426586@g.us' ;
-global.allowJids = process.env.ALLOW_JID ||'120363169665426586@g.us' ;
-global.email     = 'zubi@maher-zubair.tech' ; 
+global.inrl_key = `inrl-bot-mdaqz3ks6md7`;
+global.inrl_api = `https://upper-romy-inrl-bot.koyeb.app/`;
+global.blockJids = process.env.BLOCK_JID ||'120363225995019625@g.us' ;
+global.allowJids = process.env.ALLOW_JID ||'120363225995019625@g.us' ;
+global.email     = 'support@maher-zubair.tech' ; 
 global.github    = 'https://github.com/Maher-Zubair/SIGMA-MD' ;
 global.location  = 'Lahore, Pakistan' ;
-global.website   = 'httpS://maher-zubair.tech' ; 
+global.website   = 'https://maher-zubair.tech' ; 
+global.maher_api = process.env.MAHER_API || `https://api.maher-zubair.tech/` ; // MY OWN OFFICIAL API WEBSITE, YOU CAN USE IT IN YOUR BOT OR PROJECT
 //=================================================================================
 
 
@@ -29,7 +66,7 @@ global.timezone  = process.env.TIME_ZONE || 'Asia/Karachi' // ADD CORRECT TIMEZO
 
 //======================[YOUR CHOICE, CHANGE OR LEAVE IT SAME]=====================
 global.sudo  =  process.env.SUDO || "923466319114" ;          // DON'T REMOVE
-global.mztit = process.env.MZTIT ||"sɪɢᴍᴀ-ᴍᴅ",               // ADD YOUR TITLE
+global.mztit = process.env.MZTIT ||"🅼♥︎❚❚♥︎🆉",               // ADD YOUR TITLE, ONE WORD WILL BE MORE BETTER
 global.gurl  = 'https://www.youtube.com/@InnoxentTech?sub_confirmation=1' ; 
 global.THUMB_IMAGE = process.env.THUMB_IMAGE || 'https://telegra.ph/file/03e49e6e2057568db8926.jpg' ;
 //=================================================================================
@@ -60,7 +97,7 @@ module.exports = {
   //===========================[YOUR CHOICE, CHANGE OT LEAVE IT SAME]================
   warncount : process.env.WARN_COUNT || 2,                 // WARN LIMITS
   MsgsInLog:process.env.MSGS_IN_LOG  || 'false',            // IF TRUE IT WILL SHOW YOUR MESSAGES IN LOGS
-  pmMsgsInLog:process.env.PM_MSGS_IN_LOGS    ||'false',   // IF TRUE IT WILL SHOW YOUR PM MESSAGES IN LOGS
+  pmMsgsInLog:process.env.PM_MSGS_IN_LOGS    || 'false',   // IF TRUE IT WILL SHOW YOUR PM MESSAGES IN LOGS
   antifake :   process.env.FAKE_COUNTRY_CODE || '212',     // ANTIFAKE NUMBER CAN'T JOIN GROUPS
   levelupmessage: process.env.LEVEL_UP_MESSAGE ||'true', // SENDS A LEVEL UP MESSAGE WHEN SOMEONE'S RANK INCREASE
   antilink_values: process.env.ANTILINK_VALUES || 'https://,chat.whatsapp.com,youtube.com,instagram.com,tiktok.com,vt.tiktok.com,wa.me,facebook.com', // ANTILINKS VALUES, IT WILL TAKE ACTION WHO SEND THESE LINKS
@@ -76,9 +113,9 @@ module.exports = {
   BRANCH: process.env.BRANCH   || 'Main',
   HEROKU_APP_NAME: process.env.HEROKU_APP_NAME,
   HEROKU_API_KEY: process.env.HEROKU_API_KEY,
-  caption :process.env.CAPTION || "\t⤹★ᴘᴏᴡᴇʀᴇᴅ ʙʏ★⤸ sɪɢᴍᴀ-ᴍᴅ ",
-  LANG: process.env.THEME || 'SIGMA_MD',
-  VERSION: process.env.VERSION || '𝚅.𝟷.𝟺.𝟿'
+  caption :process.env.CAPTION || "*• ѕιgмα-м∂ мυℓтι-∂єνι¢є*\n*• ωнαтѕαρρ вσт* ",
+  LANG: process.env.THEME.toUpperCase() || "SIGMA_MD",
+  VERSION: process.env.VERSION || '𝚅.𝟷.𝟻.𝟹'
   //=================================================================================
 };
 
