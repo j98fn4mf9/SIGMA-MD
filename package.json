@@ -24,6 +24,7 @@
     ],
     "dependencies": {
         "@adiwajshing/keyed-db": "^0.2.4",
+        "@bochilteam/scraper-sosmed": "^1.0.5",
         "@hapi/boom": "^10.0.1",
         "@mapbox/node-pre-gyp": "^1.0.11",
         "@shineiichijo/marika": "^2.0.3",
