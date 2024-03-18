@@ -50,6 +50,7 @@ global.suc = `✅`
 global.dl = `📥`
 global.upd = `📤`
 global.wait = `⏳`
+global.alrt = `❗`
 global.inrl_key = `inrl-bot-mdaqz3ks6md7`;
 global.inrl_api = `https://upper-romy-inrl-bot.koyeb.app/`;
 global.blockJids = process.env.BLOCK_JID ||'120363225995019625@g.us' ;
