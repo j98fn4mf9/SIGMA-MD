@@ -29,6 +29,7 @@
         "@mapbox/node-pre-gyp": "^1.0.11",
         "@shineiichijo/marika": "^2.0.3",
         "@whiskeysockets/baileys": "^6.5.0",
+        "api-dylux": "^1.7.2",
         "acrcloud": "^1.4.0",
         "anime-character-random": "latest",
         "aptoide-scraper": "^1.0.1",
